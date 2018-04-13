@@ -1,21 +1,17 @@
 # vue-music-webapp
 
-> A Vue.js project
+> 基于 Vue 2.0 构建移动端音乐 WebApp
 
-## Build Setup
+### 声明
 
-``` bash
-# install dependencies
-npm install
+本项目来自于 [黄轶](https://github.com/ustbhuangyi) 老师的慕课网教程 [Vue 2.0高级实战 开发移动端音乐 WebAPP ](http://coding.imooc.com/class/107.html),目的在学习交流，如果有冒犯相关的权益，还望告知，会删掉仓库。
 
-# serve with hot reload at localhost:8080
-npm run dev
+### 为什么会有这个仓库
 
-# build for production with minification
-npm run build
+其实这个仓库主要目的是在于记录代码（有点等于没说~哈哈哈），相信所有的代码只有自己琢磨一下才会有深刻的印象。
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+还是说实话吧，其实是想刷一下 `Github` 的经验值
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+**不对，还是把真正的实话说出来吧：日益增长的物质文化需要(支付不起价格)同落后的社会生产之间（工资低）的矛盾**
+
+### 相关说明
