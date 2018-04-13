@@ -12,7 +12,7 @@
 
 还是说实话吧，其实是想刷一下 `Github` 的经验值
 
-**不对，还是把真正的实话说出来吧：日益增长的物质文化需要(支付不起价格)同落后的社会生产之间（工资低）的矛盾**
+**不对，还是把真正的实话说出来吧：日益增长的物质文化需要（支付不起价格）同落后的社会生产之间（工资低）的矛盾**
 
 ### 相关说明
 
@@ -21,6 +21,6 @@
 `git clone` 分支：
 
 ``` bash
- git clone -b vue-music-webapp https://github.com/KuangPF/vue-music-webapp.git
+git clone -b vue-music-webapp https://github.com/KuangPF/vue-music-webapp.git
 
 ```
