@@ -6,6 +6,7 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+import '@/common/scss/index.scss'; // eslint-disable-line
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

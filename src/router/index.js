@@ -1,15 +1,22 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
 
 Vue.use(Router);
 
+// 路由懒加载
+const MyRecommend = (resolve) => {
+  import('@/components/MyRecommend/MyRecommend').then((module) => {
+    resolve(module);
+  });
+};
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+  routes: [{
+    path: '/',
+    redict: '/recommend'
+  }, {
+    path: '/recommend',
+    name: 'ecommend',
+    component: MyRecommend
+
+  }]
 });
