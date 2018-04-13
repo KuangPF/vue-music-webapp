@@ -15,3 +15,12 @@
 **不对，还是把真正的实话说出来吧：日益增长的物质文化需要(支付不起价格)同落后的社会生产之间（工资低）的矛盾**
 
 ### 相关说明
+
+`master` 为日常代码... `vue-music-webapp` 为项目源代码，
+
+`git clone` 分支：
+
+``` bash
+ git clone -b vue-music-webapp https://github.com/KuangPF/vue-music-webapp.git
+
+```
