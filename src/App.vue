@@ -1,23 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <my-header></my-header>
+    <my-tab></my-tab>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+    <my-player></my-player>
   </div>
 </template>
 
 <script>
+import MyHeader from '@/components/MyHeader/MyHeader'
+import MyTab from '@/components/MyTab/MyTab'
+import MyPlayer from '@/components/MyPlayer/MyPlayer'
+
 export default {
-  name: 'App'
-};
+  components: {
+    MyHeader,
+    MyTab,
+    MyPlayer
+  }
+}
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 </style>
