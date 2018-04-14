@@ -29,5 +29,6 @@ module.exports = {
       'error',
       'always'
     ],
+    'func-call-spacing': 'off'
   }
 }

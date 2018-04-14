@@ -5,7 +5,13 @@ Vue.use(Router);
 
 // 路由懒加载
 const MyRecommend = (resolve) => {
-  import('@/components/MyRecommend/MyRecommend').then((module) => {
+  import ('@/components/MyRecommend/MyRecommend').then((module) => {
+    resolve(module);
+  });
+};
+
+const MyUser = (resolve) => {
+  import ('@/components/MyUser/MyUser').then((module) => {
     resolve(module);
   });
 };
@@ -18,5 +24,9 @@ export default new Router({
     name: 'ecommend',
     component: MyRecommend
 
+  }, {
+    path: '/user',
+    name: 'user',
+    component: MyUser
   }]
 });
