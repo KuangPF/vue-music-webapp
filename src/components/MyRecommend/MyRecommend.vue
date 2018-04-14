@@ -1,5 +1,5 @@
 <template>
-  <div>recommend</div>
+  <div></div>
 </template>
 
 <script>
