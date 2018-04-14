@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <my-header></my-header>
+    <my-tab></my-tab>
     <router-view/>
   </div>
 </template>
 
 <script>
 import MyHeader from '@/components/MyHeader/MyHeader'; // eslint-disable-line
+import MyTab from '@/components/MyTab/MyTab';
 export default {
   name: 'App',
   components: {
-    MyHeader
+    MyHeader,
+    MyTab
   }
 };
 </script>

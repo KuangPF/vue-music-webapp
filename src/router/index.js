@@ -21,7 +21,7 @@ export default new Router({
     redict: '/recommend'
   }, {
     path: '/recommend',
-    name: 'ecommend',
+    name: 'recommend',
     component: MyRecommend
 
   }, {
