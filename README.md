@@ -6,6 +6,10 @@
 
 本项目来自于 [黄轶](https://github.com/ustbhuangyi) 老师的慕课网教程 [Vue 2.0高级实战 开发移动端音乐 WebAPP ](http://coding.imooc.com/class/107.html),目的在学习交流，如果有冒犯相关的权益，还望告知，会删掉仓库。
 
+### 最终效果
+
+[项目演示地址](http://ustbhuangyi.com/music/#/recommend)
+
 ### 为什么会有这个仓库
 
 其实这个仓库主要目的是在于记录代码（有点等于没说~哈哈哈），相信所有的代码只有自己琢磨一下才会有深刻的印象。

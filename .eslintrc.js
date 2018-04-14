@@ -29,6 +29,7 @@ module.exports = {
       'error',
       'always'
     ],
-    'func-call-spacing': 'off'
+    'func-call-spacing': 'off',
+    'space-before-function-paren': 'off'
   }
 }
