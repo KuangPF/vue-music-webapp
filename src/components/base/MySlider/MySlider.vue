@@ -43,7 +43,7 @@ export default {
     _setSliderWidth(isResize) {
       // 拿到传过来的图片
       this.children = this.$refs.sliderGroup.children;
-      // console.log(this.children) // (5) [div, div, div, div, div]
+      // console.log(this.children); // (5) [div, div, div, div, div]
 
       // 拿到父元素（slider）宽度
       let width = 0;
@@ -72,7 +72,8 @@ export default {
         snap: true,
         snapLoop: this.loop,
         snapThreshold: 0.3,
-        snapSpeed: 400
+        snapSpeed: 400,
+        click: true
       });
 
       this.slider.on('scrollEnd', () => {

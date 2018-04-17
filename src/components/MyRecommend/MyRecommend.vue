@@ -1,5 +1,4 @@
 <!-- 推荐页组件 -->
-
 <template>
   <div class="my-recommend">
     <!-- better-scroll 滚动组件，当请求到 lists 时才渲染 -->
@@ -42,6 +41,7 @@ export default {
     _getRecommend() {
       getRecommend().then((res) => {
         if (res.code === 0) {
+          console.log(res);
           this.recommends = res.data.slider;
         }
       });
