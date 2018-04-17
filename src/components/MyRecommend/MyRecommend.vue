@@ -16,6 +16,9 @@
         </div>
 
         <!-- list 列表 -->
+        <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+        </div>
         <!-- loading 组件 -->
         <div class="loading-container" v-show="false">
           <my-loading></my-loading>
@@ -29,7 +32,7 @@
 import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MySlider from '@/components/base/MySlider/MySlider';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
-import { getRecommend } from '@/api/recommend.js';
+import { getRecommend, getList } from '@/api/recommend.js';
 export default {
   data() {
     return {
@@ -43,6 +46,7 @@ export default {
   },
   created() {
     this._getRecommend();
+    this._getList();
   },
   methods: {
     // 获取轮播图数据
@@ -51,6 +55,11 @@ export default {
         if (res.code === 0) {
           this.recommends = res.data.slider;
         }
+      });
+    },
+    _getList() {
+      getList().then((res) => {
+        console.log('list' + res);
       });
     },
     // 当首次获取到图片时，Better-scroll 重新计算

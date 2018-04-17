@@ -94,7 +94,6 @@ export default {
     // 初始化轮播点
     _initDots() {
       this.dots = new Array(this.children.length);
-      console.log(this.dots);
     },
     // 自动播放
     _initPlay() {
