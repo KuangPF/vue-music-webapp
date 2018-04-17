@@ -14,6 +14,12 @@
             </div>
           </my-slider>
         </div>
+
+        <!-- list 列表 -->
+        <!-- loading 组件 -->
+        <div class="loading-container" v-show="false">
+          <my-loading></my-loading>
+        </div>
       </div>
     </my-scroll>
   </div>
@@ -22,6 +28,7 @@
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MySlider from '@/components/base/MySlider/MySlider';
+import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { getRecommend } from '@/api/recommend.js';
 export default {
   data() {
@@ -31,7 +38,8 @@ export default {
   },
   components: {
     MyScroll,
-    MySlider
+    MySlider,
+    MyLoading
   },
   created() {
     this._getRecommend();
