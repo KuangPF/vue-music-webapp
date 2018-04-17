@@ -5,7 +5,7 @@
     </div>
     <!-- 轮播点 -->
     <div class="dots">
-      <span v-for="(dot, index) in dots" :key="index" :class="{ active: currentDotsIndex === index }" class="dot"></span>
+      <span v-for="(dot, index) in dots" :class="{ active: currentDotsIndex === index }" class="dot" :key="index"></span>
     </div>
   </div>
 </template>
@@ -94,6 +94,7 @@ export default {
     // 初始化轮播点
     _initDots() {
       this.dots = new Array(this.children.length);
+      console.log(this.dots);
     },
     // 自动播放
     _initPlay() {

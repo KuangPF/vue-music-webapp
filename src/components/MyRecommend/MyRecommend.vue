@@ -41,7 +41,6 @@ export default {
     _getRecommend() {
       getRecommend().then((res) => {
         if (res.code === 0) {
-          console.log(res);
           this.recommends = res.data.slider;
         }
       });
