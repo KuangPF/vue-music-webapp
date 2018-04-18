@@ -1,6 +1,9 @@
 <template>
   <my-scroll class="my-phone-list">
-sss
+    <ul>
+      <li ref="">
+      </li>
+    </ul>
   </my-scroll>
 </template>
 
