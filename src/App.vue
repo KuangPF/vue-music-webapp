@@ -21,5 +21,16 @@ export default {
 </script>
 
 <style>
-
+/* 图片懒加载样式 */
+img[lazy="loaded"] {
+  animation: imgLoaded 0.5s ease-in-out;
+}
+@keyframes imgLoaded {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 </style>

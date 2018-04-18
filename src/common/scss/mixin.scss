@@ -5,3 +5,12 @@
     background-image: url($name+'@3x.png');
   }
 }
+
+// 单行文本超出显示省略号
+@mixin no-wrap() {
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
