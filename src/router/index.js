@@ -35,7 +35,7 @@ const MyUser = (resolve) => {
 export default new Router({
   routes: [{
     path: '/',
-    redict: '/recommend'
+    redirect: '/recommend'
   }, {
     path: '/recommend',
     name: 'recommend',
