@@ -31,7 +31,7 @@
           </ul>
         </div>
         <!-- loading 组件 -->
-        <div class="loading-container" v-show="false">
+        <div class="loading-container" v-show="!lists.length">
           <my-loading></my-loading>
         </div>
       </div>

@@ -58,7 +58,7 @@
   }
 }
 img[lazy=loaded] {
-  animation: imgLoaded 1s ease-in-out;
+  animation: imgLoaded .5s ease-in-out;
 }
 @keyframes imgLoaded {
   0% {
