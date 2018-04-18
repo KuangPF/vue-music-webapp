@@ -30,10 +30,10 @@
             </li>
           </ul>
         </div>
-        <!-- loading 组件 -->
-        <div class="loading-container" v-show="!lists.length">
-          <my-loading></my-loading>
-        </div>
+      </div>
+      <!-- loading 组件 -->
+      <div v-show="!lists.length" class="loading-container">
+        <my-loading></my-loading>
       </div>
     </my-scroll>
   </div>
@@ -58,7 +58,9 @@ export default {
   },
   created() {
     this._getRecommend();
-    this._getList();
+    setTimeout(() => {
+      this._getList();
+    }, 1000);
   },
   methods: {
     // 获取轮播图数据
