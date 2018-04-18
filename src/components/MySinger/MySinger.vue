@@ -82,6 +82,6 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+@import "~@/common/scss/mySinger/mySinger.scss";
 </style>
