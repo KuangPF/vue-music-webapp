@@ -11,11 +11,16 @@
         </ul>
       </li>
     </ul>
+    <!-- 滚动固定标题实现 -->
+    <div ref="fixedTitleRef" v-show="fixedTitle" class="list-fixed">
+      <h1 class="fixed-title">{{ fixedTitle }}</h1>
+    </div>
   </my-scroll>
 </template>
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+const TITLE_HEIGHT = 29;
 export default {
   data() {
     return {
@@ -63,6 +68,23 @@ export default {
       }
       // 当滚动到底部，且-newY大于最后一个元素的上限
       this.currentIndex = leftListHeight.length - 2;
+    },
+    diff(newVal) {
+      console.log(newVal);
+      let fixedTop = (newVal > 0 && newVal - TITLE_HEIGHT < 0) ? newVal - TITLE_HEIGHT : 0;
+      if (this.fixedTop === fixedTop) {
+        return;
+      }
+      this.fixedTop = fixedTop;
+      this.$refs.fixedTitleRef.style.transform = `translate3d(0, ${fixedTop}px, 0)`;
+    }
+  },
+  computed: {
+    fixedTitle() {
+      if (this.scrollY > 0) {
+        return '';
+      }
+      return this.data[this.currentIndex] ? this.data[this.currentIndex].title : '';
     }
   },
   methods: {
