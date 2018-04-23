@@ -23,7 +23,7 @@ export default {
 <style>
 /* 图片懒加载样式 */
 img[lazy="loaded"] {
-  animation: imgLoaded 0.5s ease-in-out;
+  animation: imgLoaded 0.2s ease-in-out;
 }
 @keyframes imgLoaded {
   0% {
