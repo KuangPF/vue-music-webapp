@@ -17,6 +17,13 @@
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
 export default {
+  data() {
+    return {
+      scrollY: -1,
+      currentIndex: 0,
+      diff: -1
+    };
+  },
   components: {
     MyScroll
   },
@@ -36,11 +43,31 @@ export default {
       setTimeout(() => {
         this._caclHeight();
       }, 20);
+    },
+    // 监听 scrollY 落在 leftListHeight 的哪个区间，实现高亮联动
+    scrollY(newY) {
+      const leftListHeight = this.leftListHeight;
+      if (newY > 0) { // 滚动到顶部
+        this.currentIndex = 0;
+        return;
+      }
+      // 滚动到中间部分
+      for (let i = 0; i < leftListHeight.length; i++) {
+        let height1 = leftListHeight[i];
+        let height2 = leftListHeight[i + 1];
+        if (-newY >= height1 && -newY < height2) {
+          this.currentIndex = i;
+          this.diff = height2 + newY;
+          return;
+        }
+      }
+      // 当滚动到底部，且-newY大于最后一个元素的上限
+      this.currentIndex = leftListHeight.length - 2;
     }
   },
   methods: {
     scroll(pos) {
-      // console.log(pos);
+      this.scrollY = pos.y;
     },
     // 计算 leftListHeight
     _caclHeight() {
