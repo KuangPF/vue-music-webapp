@@ -49,7 +49,6 @@ export default {
     _getRankList() {
       getRankList().then((res) => {
         if (res.code === 0) {
-          console.log(this);
           this.toplist = res.data.topList;
         }
       });

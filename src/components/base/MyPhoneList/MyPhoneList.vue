@@ -1,5 +1,5 @@
 <template>
-  <my-scroll class="my-phone-list" :data="data" ref="scrollRef">
+  <my-scroll class="my-phone-list" :data="data" ref="scrollRef" @scroll="scroll" :probeType="probeType" :listen-scroll="listenScroll">
     <ul>
       <li ref="leftRef" v-for="(group,index) in data" class="list-group" :key="index">
         <h2 class="list-group-title">{{ group.title }}</h2>
@@ -20,10 +20,19 @@ export default {
   components: {
     MyScroll
   },
+  created() {
+    this.listenScroll = true;
+    this.probeType = 3;
+  },
   props: {
     data: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    scroll(pos) {
+      // console.log(pos);
     }
   }
 };
