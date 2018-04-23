@@ -15,6 +15,13 @@
     <div ref="fixedTitleRef" v-show="fixedTitle" class="list-fixed">
       <h1 class="fixed-title">{{ fixedTitle }}</h1>
     </div>
+
+    <!-- 右侧字母列表 -->
+    <div class="list-shortcut">
+      <ul>
+        <li v-for="(item, index) in shortcut" :data-index="index" class="item" :key="index">{{ item }}</li>
+      </ul>
+    </div>
   </my-scroll>
 </template>
 
@@ -70,7 +77,6 @@ export default {
       this.currentIndex = leftListHeight.length - 2;
     },
     diff(newVal) {
-      console.log(newVal);
       let fixedTop = (newVal > 0 && newVal - TITLE_HEIGHT < 0) ? newVal - TITLE_HEIGHT : 0;
       if (this.fixedTop === fixedTop) {
         return;
@@ -80,6 +86,12 @@ export default {
     }
   },
   computed: {
+    // 快速入口排列数组
+    shortcut() {
+      return this.data.map((group) => {
+        return group.title.substr(0, 1);
+      });
+    },
     fixedTitle() {
       if (this.scrollY > 0) {
         return '';
