@@ -21,6 +21,7 @@ export default {
     MyScroll
   },
   created() {
+    this.leftListHeight = [];
     this.listenScroll = true;
     this.probeType = 3;
   },
@@ -30,9 +31,29 @@ export default {
       default: () => []
     }
   },
+  watch: {
+    data() {
+      setTimeout(() => {
+        this._caclHeight();
+      }, 20);
+    }
+  },
   methods: {
     scroll(pos) {
       // console.log(pos);
+    },
+    // 计算 leftListHeight
+    _caclHeight() {
+      // 初始化 height
+      let height = 0;
+      this.leftListHeight = [];
+      this.leftListHeight.push(height);
+      let list = this.$refs.leftRef;
+      for (let i = 0; i < list.length; i++) {
+        height += list[i].clientHeight;
+        this.leftListHeight.push(height);
+      };
+      // console.log(this.leftListHeight); // [0, 760, 1030, 1370, 1780, 1910, 2110, 2450, 2720, 3060, 3190, 3950, 4430, 4700, 4900, 5100, 5370, 5570, 5980, 6460, 7010, 7560, 7900, 9010]
     }
   }
 };
