@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     _getSingerList() {
-      getSingerList().then((res) => {
+      getSingerList().then(res => {
         console.log(res);
         this.singers = this._formatSingers(res.data.list);
       });
@@ -45,7 +45,7 @@ export default {
         // 填充热门歌手数据
         if (index < HOT_NUM) {
           map.hot.items.push(createSinger(item));
-        };
+        }
 
         // 填充 a-z 字母
         let key = item.Findex;
@@ -83,5 +83,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/common/scss/mySinger/mySinger.scss";
+@import '~@/common/scss/mySinger/mySinger.scss';
 </style>
