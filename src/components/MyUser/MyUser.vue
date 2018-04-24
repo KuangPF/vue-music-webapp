@@ -17,10 +17,7 @@ import MySwitches from '@/components/base/MySwitches/MySwitches';
 export default {
   data() {
     return {
-      switches: [
-        { name: '我的收藏' },
-        { name: '最近播放' }
-      ],
+      switches: [{ name: '我的收藏' }, { name: '最近播放' }],
       currentIndex: 0
     };
   },
@@ -39,5 +36,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/common/scss/myUser/myUser.scss";
+@import '~@/common/scss/myUser/myUser.scss';
 </style>
