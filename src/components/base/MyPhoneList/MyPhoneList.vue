@@ -19,7 +19,7 @@
     <!-- 右侧字母列表 -->
     <div class="list-shortcut">
       <ul>
-        <li v-for="(item, index) in shortcut" :data-index="index" class="item" :key="index">{{ item }}</li>
+        <li v-for="(item, index) in shortcut" :data-index="index" class="item" :class="{'current':index === currentIndex}" :key="index">{{ item }}</li>
       </ul>
     </div>
   </my-scroll>

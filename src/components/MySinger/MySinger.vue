@@ -26,7 +26,6 @@ export default {
   methods: {
     _getSingerList() {
       getSingerList().then(res => {
-        console.log(res);
         this.singers = this._formatSingers(res.data.list);
       });
     },
@@ -75,7 +74,6 @@ export default {
       others.sort((a, b) => {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0);
       });
-      console.log(hot.concat(others));
       return hot.concat(others);
     }
   }
