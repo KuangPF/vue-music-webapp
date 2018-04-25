@@ -17,7 +17,7 @@
     </div>
 
     <!-- 右侧字母列表 -->
-    <div class="list-shortcut">
+    <div class="list-shortcut" @touchmove.stop.prevent="onShortcutTouchmove" @touchstart="onShortcutTouchstart">
       <ul>
         <li v-for="(item, index) in shortcut" :data-index="index" class="item" :class="{'current':index === currentIndex}" :key="index">{{ item }}</li>
       </ul>
@@ -27,7 +27,9 @@
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import { myDOM } from '@/common/js/myutils.js';
 const TITLE_HEIGHT = 29;
+const RIGHT_ONEWORD_HEIGHT = 18;
 export default {
   data() {
     return {
@@ -40,6 +42,7 @@ export default {
     MyScroll
   },
   created() {
+    this.touch = {};
     this.leftListHeight = [];
     this.listenScroll = true;
     this.probeType = 3;
@@ -115,6 +118,28 @@ export default {
         this.leftListHeight.push(height);
       };
       // console.log(this.leftListHeight); // [0, 760, 1030, 1370, 1780, 1910, 2110, 2450, 2720, 3060, 3190, 3950, 4430, 4700, 4900, 5100, 5370, 5570, 5980, 6460, 7010, 7560, 7900, 9010]
+    },
+    onShortcutTouchstart(e) {
+      let nowIndex = myDOM.customAttribute(e.target, 'index');
+      this._scrollTo(nowIndex);
+    },
+    onShortcutTouchmove(e) {
+      let nowTouch = e.touches[0];
+      this.touch.y2 = nowTouch.pageY;
+
+      // 两次 touch y轴偏移
+      let offset = Math.floor((this.touch.y2 - this.touch.y1) / RIGHT_ONEWORD_HEIGHT);
+      let nowIndex = Number(this.touch.nowIndex) + offset;
+      this._scrollTo(nowIndex);
+    },
+    _scrollTo(index) {
+      if (!index) {
+        return; // eslint-disable-line
+      } else if (index > this.leftListHeight.length - 2) {
+        index = this.leftListHeight.length - 2;
+      }
+      this.currentIndex = Number(index);
+      this.$refs.scrollRef.scrollToElement(this.$refs.leftRef[index], 0);
     }
   }
 };
