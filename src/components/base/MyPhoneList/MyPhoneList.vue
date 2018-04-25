@@ -120,7 +120,10 @@ export default {
       // console.log(this.leftListHeight); // [0, 760, 1030, 1370, 1780, 1910, 2110, 2450, 2720, 3060, 3190, 3950, 4430, 4700, 4900, 5100, 5370, 5570, 5980, 6460, 7010, 7560, 7900, 9010]
     },
     onShortcutTouchstart(e) {
+      let nowTouch = e.touches[0];
+      this.touch.y1 = nowTouch.pageY;
       let nowIndex = myDOM.customAttribute(e.target, 'index');
+      this.touch.nowIndex = nowIndex;
       this._scrollTo(nowIndex);
     },
     onShortcutTouchmove(e) {
