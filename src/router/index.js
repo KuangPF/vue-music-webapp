@@ -32,6 +32,12 @@ const MyUser = (resolve) => {
     resolve(module);
   });
 };
+
+const MySongListDetail = (resolve) => {
+  import ('@/components/MySongListDetail/MySongListDetail').then((module) => {
+    resolve(module);
+  });
+};
 export default new Router({
   routes: [{
     path: '/',
@@ -39,8 +45,12 @@ export default new Router({
   }, {
     path: '/recommend',
     name: 'recommend',
-    component: MyRecommend
-
+    component: MyRecommend,
+    children: [{
+      path: ':id',
+      name: 'songlistdetail',
+      component: MySongListDetail
+    }]
   }, {
     path: '/user',
     name: 'user',

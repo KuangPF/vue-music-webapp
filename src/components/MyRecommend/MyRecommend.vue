@@ -19,7 +19,7 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li v-for="(item,index) in lists" class="item" :key="index">
+            <li v-for="(item,index) in lists" class="item" :key="index" @click="selectItem(item)">
               <div class="icon">
                 <img width="60" height="60" v-lazy="item.imgurl">
               </div>
@@ -36,6 +36,7 @@
         <my-loading></my-loading>
       </div>
     </my-scroll>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -83,6 +84,12 @@ export default {
         this.$refs.scroll.refresh();
         this.flag = true;
       }
+    },
+    selectItem(item) {
+      console.log(item);
+      this.$router.push({
+        path: `/recommend/${item.dissid}`
+      });
     }
   }
 };

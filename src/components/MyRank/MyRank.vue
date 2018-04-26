@@ -3,7 +3,7 @@
     <!-- 排行榜数据 -->
     <my-scroll ref="scrollRef" :data="toplist" class="toplist">
       <ul>
-        <li class="item" v-for="(item,index) in toplist" @click="selectItem(item)" :key="index">
+        <li class="item" v-for="(item,index) in toplist" :key="index">
           <!-- 左图 -->
           <div class="icon">
             <img width="100" height="100" v-lazy="item.picUrl" @load="loadImg">
