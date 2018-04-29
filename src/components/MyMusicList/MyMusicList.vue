@@ -6,6 +6,7 @@
     </div>
     <!-- 顶部歌手名字 -->
     <div v-html="title" class="title"></div>
+    <div class="bg-image" :style="bgStyle"></div>
   </div>
 </template>
 
@@ -20,11 +21,20 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    bgImage: {
+      type: String,
+      default: ''
     }
   },
   methods: {
     back() {
       this.$router.back();
+    }
+  },
+  computed: {
+    bgStyle() {
+      return `background-image:url(${this.bgImage})`;
     }
   }
 };
