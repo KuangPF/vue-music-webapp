@@ -4,6 +4,8 @@
     <div @click="back" class="back">
       <i class="icon-back"></i>
     </div>
+    <!-- 顶部歌手名字 -->
+    <div v-html="title" class="title"></div>
   </div>
 </template>
 
@@ -13,6 +15,12 @@ export default {
     return {
 
     };
+  },
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }
   },
   methods: {
     back() {
