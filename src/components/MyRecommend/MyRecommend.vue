@@ -45,6 +45,7 @@ import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MySlider from '@/components/base/MySlider/MySlider';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { getRecommend, getList } from '@/api/recommend.js';
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -64,6 +65,9 @@ export default {
     }, 1000);
   },
   methods: {
+    ...mapMutations({
+      setSonglist: 'SET_SONGLIST'
+    }),
     // 获取轮播图数据
     _getRecommend() {
       getRecommend().then((res) => {
@@ -90,6 +94,8 @@ export default {
       this.$router.push({
         path: `/recommend/${item.dissid}`
       });
+      // 写入 vuex
+      this.setSonglist(item);
     }
   }
 };

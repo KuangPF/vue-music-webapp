@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from './store';
 import VueLazyload from 'vue-lazyload';
 
 // 消除 click 移动浏览器300ms延迟
@@ -23,6 +24,7 @@ Vue.use(VueLazyload, {
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },
