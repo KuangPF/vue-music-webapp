@@ -6,12 +6,20 @@
     </div>
     <!-- 顶部歌手名字 -->
     <div v-html="title" class="title"></div>
-    <div class="bg-image" :style="bgStyle"></div>
+    <div class="bg-image" :style="bgStyle">
+      <!--蒙层 -->
+      <div class="filter"></div>
+    </div>
+    <my-scroll></my-scroll>
   </div>
 </template>
 
 <script>
+import MyScroll from '@/components/base/MyScroll/MyScroll';
 export default {
+  components: {
+    MyScroll
+  },
   data() {
     return {
 
