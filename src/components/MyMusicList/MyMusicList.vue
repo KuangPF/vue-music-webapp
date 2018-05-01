@@ -10,15 +10,22 @@
       <!--蒙层 -->
       <div class="filter"></div>
     </div>
-    <my-scroll></my-scroll>
+    <my-scroll>
+      <div class="song-list-wrapper">
+        <my-song-list :songs="songs">
+        </my-song-list>
+      </div>
+    </my-scroll>
   </div>
 </template>
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import MySongList from '@/components/base/MySongList/MySongList';
 export default {
   components: {
-    MyScroll
+    MyScroll,
+    MySongList
   },
   data() {
     return {
@@ -33,6 +40,10 @@ export default {
     bgImage: {
       type: String,
       default: ''
+    },
+    songs: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {

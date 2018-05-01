@@ -1,15 +1,20 @@
 <template>
   <transition name="slide">
-    <my-music-list :title="title" :bgImage="bgImage"></my-music-list>
+    <my-music-list :title="title" :bgImage="bgImage" :songs="songs"></my-music-list>
   </transition>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import MyMusicList from '@/components/MyMusicList/MyMusicList';
+import { getSongList } from '@/api/recommend.js';
 export default {
   components: {
     MyMusicList
+  },
+  data() {
+    return {
+    };
   },
   computed: {
     ...mapGetters(['songlist']),
@@ -27,6 +32,10 @@ export default {
         this.$router.push('/recommend');
         return; // eslint-disable-line
       }
+      console.log(this.songlist.dissid);
+      getSongList(this.songlist.dissid).then(res => {
+        console.log(res);
+      });
     }
   },
   created() {
