@@ -72,7 +72,6 @@ export default {
       this.$router.back();
     },
     scroll(pos) {
-      console.log(pos.y);
       this.scrollY = pos.y;
     }
   },
