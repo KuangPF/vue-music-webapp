@@ -1,14 +1,11 @@
-// g_tk=1903152385&uin=80583600&format=json&inCharset=utf-8&outCharset=utf-8
-// notice=0&platform=h5&needNewCode=1&_=1501499154367
-
 export const commonParams = {
-  g_tk: 5381,
-  format: 'jsonp',
+  g_tk: 1928093487,
   inCharset: 'utf-8',
   outCharset: 'utf-8',
-  notice: 0
+  notice: 0,
+  format: 'jsonp'
 }
-
-export const opts = {
-  param: 'jsonpCallback'
+export const options = {
+  param:'jsonpCallback'
 }
+export const ERR_OK = 0

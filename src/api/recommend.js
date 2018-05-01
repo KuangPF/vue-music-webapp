@@ -1,59 +1,44 @@
-import jsonp from '@/common/js/jsonp'
+import jsonp from 'common/js/jsonp'
+import {commonParams, options} from './config'
 import axios from 'axios'
-import { commonParams, opts } from '@/api/common-query.js'
-
-/**
- * jsonp 抓取推荐页轮播图数据
- * 接口：https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg
- */
-export function getRecommend() {
-  let url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
-  let data = Object.assign({}, commonParams, {
-    platform: 'h5',
-    uin: 0,
-    needNewCode: 1
+export  function getRecommend() {
+  const url='https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
+  const data=Object.assign({},commonParams,{
+    platform:'h5',
+    uin:0,
+    needNewCode:1
   })
-  return jsonp(url, data, opts)
+  return jsonp(url,data,options)
 }
 
-/**
- * axios 抓取推荐页列表数据
- * 接口：https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg
- * 接口提供方使用了 referer:https://y.qq.com/portal/playlist.html
- * axios 结合 node.js 代理后端请求
- */
-export function getList() {
-  let url = '/api/getList'
-  let data = Object.assign({}, commonParams, {
-    rnd: Math.random(),
-    hostUin: 0,
-    format: 'json',
-    platform: 'yqq',
-    needNewCode: 0,
-    categoryId: 10000000,
-    sortId: 5,
-    sin: 0,
-    ein: 29
-  })
-  return axios.get(url, {
-    params: data
-  })
-  .then(function(response) {
-    return Promise.resolve(response.data)
-  })
-  .catch(function(error) {
-    console.log(error)
+export  function getDiscList() {
+  const url='/api/getDiscList'
+  const data=Object.assign({},commonParams,{
+    platform:'yqq',
+    hostUin:0,
+    sin:0,
+    ein:29,
+    sortId:5,
+    needNewCode:0,
+    categoryId:10000000,
+    rnd:Math.random(),
+    format:"json"
+      })
+  return axios.get(url,{
+    params:data
+  }).then((res)=>{
+    return Promise.resolve(res.data)
   })
 }
+ const options1 = {
 
-/**
- * jsonp 抓取推荐页歌单数据
- * 接口：https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg
- * 提供方：https://y.qq.com/n/yqq/playlist/1471714611.html#
- */
+  param: 'jsonpCallback',
+  prefix: 'playlistinfoCallback'
+}
 export function getSongList(disstid) {
-  let url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
-  let data = Object.assign({}, commonParams, {
+ const url='/api/recommendSong'
+
+  const data = Object.assign({}, commonParams, {
     disstid,
     type: 1,
     json: 1,
@@ -63,9 +48,9 @@ export function getSongList(disstid) {
     hostUin: 0,
     needNewCode: 0
   })
-  let opts = Object.assign({}, opts, {
-    param: 'jsonpCallback',
-    name: 'playlistinfoCallback'
+  return axios.get(url,{
+    params:data
+  }).then((res)=>{
+    return Promise.resolve(res.data)
   })
-  return jsonp(url, data, opts)
 }

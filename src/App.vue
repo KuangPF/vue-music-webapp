@@ -1,27 +1,29 @@
 <template>
   <div id="app">
-    <my-header></my-header>
-    <my-tab></my-tab>
+   <m-header></m-header>
+    <tab></tab>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
-    <my-player></my-player>
+    <player></player>
   </div>
 </template>
 
-<script>
-import MyHeader from '@/components/MyHeader/MyHeader'
-import MyTab from '@/components/MyTab/MyTab'
-import MyPlayer from '@/components/MyPlayer/MyPlayer'
-
-export default {
-  components: {
-    MyHeader,
-    MyTab,
-    MyPlayer
+<script type="text/ecmascript-6">
+  import MHeader from "components/m-header/m-header"
+  import Tab from "components/tab/tab"
+  import Player from 'components/player/player'
+  export default {
+    components:{
+      MHeader,
+      Tab,
+      Player
+    }
   }
-}
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  @import "./common/stylus/variable.styl"
+  #app
+    color : $color-theme
 </style>
