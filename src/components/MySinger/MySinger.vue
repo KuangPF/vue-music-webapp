@@ -1,6 +1,7 @@
 <template>
   <div class="my-singer">
-    <my-phone-list :data="singers"></my-phone-list>
+    <my-phone-list :data="singers" @select="selectSinger"></my-phone-list>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import { getSingerList } from '@/api/singer.js';
 import { createSinger } from '@/common/js/SingerClass.js';
 import MyPhoneList from '@/components/base/MyPhoneList/MyPhoneList';
+import { mapMutations } from 'vuex';
 
 const HOT_TITLE = '热门';
 const HOT_NUM = 10;
@@ -24,6 +26,9 @@ export default {
     this._getSingerList();
   },
   methods: {
+    ...mapMutations({
+      'setSinger': 'SET_SINGER'
+    }),
     _getSingerList() {
       getSingerList().then(res => {
         this.singers = this._formatSingers(res.data.list);
@@ -75,11 +80,17 @@ export default {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0);
       });
       return hot.concat(others);
+    },
+    selectSinger(singer) {
+      this.$router.push({
+        path: `/singer/${singer.id}`
+      });
+      this.setSinger(singer);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/common/scss/mySinger/mySinger.scss';
+@import "~@/common/scss/mySinger/mySinger.scss";
 </style>

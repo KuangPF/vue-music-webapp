@@ -4,7 +4,7 @@
       <li ref="leftRef" v-for="(group,index) in data" class="list-group" :key="index">
         <h2 class="list-group-title">{{ group.title }}</h2>
         <ul>
-          <li v-for="(item,index) in group.items" class="list-group-item" :key="index">
+          <li v-for="(item,index) in group.items" class="list-group-item" :key="index" @click="selectItem(item)">
             <img v-lazy="item.avatar" class="avatar">
             <span class="name">{{ item.name }}</span>
           </li>
@@ -143,6 +143,10 @@ export default {
       }
       this.currentIndex = Number(index);
       this.$refs.scrollRef.scrollToElement(this.$refs.leftRef[index], 0);
+    },
+    // 向上派发事件
+    selectItem(item) {
+      this.$emit('select', item);
     }
   }
 };
