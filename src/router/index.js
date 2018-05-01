@@ -9,19 +9,21 @@ const MyRecommend = (resolve) => {
     resolve(module);
   });
 };
-
 const MySinger = (resolve) => {
   import ('@/components/MySinger/MySinger').then((module) => {
     resolve(module);
   });
 };
-
+const MySingerDetail = (resolve) => {
+  import ('@/components/MySingerDetail/MySingerDetail').then((module) => {
+    resolve(module);
+  });
+};
 const MyRank = (resolve) => {
   import ('@/components/MyRank/MyRank').then((module) => {
     resolve(module);
   });
 };
-
 const MySearch = (resolve) => {
   import ('@/components/MySearch/MySearch').then((module) => {
     resolve(module);
@@ -32,7 +34,6 @@ const MyUser = (resolve) => {
     resolve(module);
   });
 };
-
 const MySongListDetail = (resolve) => {
   import ('@/components/MySongListDetail/MySongListDetail').then((module) => {
     resolve(module);
@@ -58,7 +59,12 @@ export default new Router({
   }, {
     path: '/singer',
     name: 'singer',
-    component: MySinger
+    component: MySinger,
+    children: [{
+      path: ':id',
+      name: 'singerDetail',
+      component: MySingerDetail
+    }]
   }, {
     path: '/rank',
     name: 'rank',

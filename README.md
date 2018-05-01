@@ -4,7 +4,7 @@
 
 ### 声明
 
-本项目来自于 [黄轶](https://github.com/ustbhuangyi) 老师的慕课网教程 [Vue 2.0高级实战 开发移动端音乐 WebAPP ](http://coding.imooc.com/class/107.html),目的在学习交流，如果有冒犯相关的权益，还望告知，会删掉仓库。
+本项目来自于 [黄轶](https://github.com/ustbhuangyi) 老师的慕课网教程 [Vue 2.0高级实战 开发移动端音乐 WebAPP ](http://coding.imooc.com/class/107.html),目的在学习交流，如果有冒犯相关的权益，还望告知。
 
 ### 最终效果
 
