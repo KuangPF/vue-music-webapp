@@ -47,4 +47,25 @@
       background: rgba(7, 17, 27, .4);
     }
   }
+  .bg-layer {
+    position: relative;
+    height: 100%;
+    background: $color-background;
+  }
+  .list {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: $color-background;
+  }
+  .song-list-wrapper {
+    padding: 20px 30px;
+  }
+  .loading-container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

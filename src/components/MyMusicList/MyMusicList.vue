@@ -6,14 +6,20 @@
     </div>
     <!-- 顶部歌手名字 -->
     <div v-html="title" class="title"></div>
-    <div class="bg-image" :style="bgStyle">
+    <div class="bg-image" :style="bgStyle" ref="bgImage">
       <!--蒙层 -->
       <div class="filter"></div>
     </div>
-    <my-scroll>
+    <!-- 推动层 -->
+    <div class="bg-layer" ref="layer"></div>
+    <my-scroll @scroll="scroll" class="list" ref="list" :data="songs" :probe-type="probeType" :listen-scroll="listenScroll">
       <div class="song-list-wrapper">
         <my-song-list :songs="songs">
         </my-song-list>
+      </div>
+      <!-- loading 组件 -->
+      <div class="loading-container" v-show="!songs.length">
+        <my-loading></my-loading>
       </div>
     </my-scroll>
   </div>
@@ -21,16 +27,31 @@
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import MyLoading from '@/components/base/MyLoading/MyLoading';
 import MySongList from '@/components/base/MySongList/MySongList';
+import { prefixStyle } from '../../common/js/dom';
+
+const TRANSFORM = prefixStyle('transform');
+const RESERVED_HEIGHT = 40;
 export default {
   components: {
     MyScroll,
-    MySongList
+    MySongList,
+    MyLoading
   },
   data() {
     return {
-
+      scrollY: 0
     };
+  },
+  created() {
+    this.probeType = 3;
+    this.listenScroll = true;
+  },
+  mounted() {
+    this.imageHeight = this.$refs.bgImage.clientHeight;
+    this.minTranslate = -this.imageHeight + RESERVED_HEIGHT;
+    this.$refs.list.$el.style.top = this.imageHeight + 'px';
   },
   props: {
     title: {
@@ -49,6 +70,26 @@ export default {
   methods: {
     back() {
       this.$router.back();
+    },
+    scroll(pos) {
+      console.log(pos.y);
+      this.scrollY = pos.y;
+    }
+  },
+  watch: {
+    scrollY(newY) {
+      let translateY = Math.max(this.minTranslate, newY);
+      let zIndex = 0;
+      this.$refs.layer.style[TRANSFORM] = `translate3d(0,${translateY}px,0)`;
+      if (newY < this.minTranslate) {
+        zIndex = 10;
+        this.$refs.bgImage.style.paddingTop = 0;
+        this.$refs.bgImage.style.height = RESERVED_HEIGHT + 'px';
+      } else {
+        this.$refs.bgImage.style.paddingTop = '70%';
+        this.$refs.bgImage.style.height = 0;
+      }
+      this.$refs.bgImage.style.zIndex = zIndex;
     }
   },
   computed: {
