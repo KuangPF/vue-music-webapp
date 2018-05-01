@@ -2,8 +2,8 @@ import jsonp from '@/common/js/jsonp';
 import axios from 'axios';
 import {
   commonParams,
-  opts
-} from '@/api/common-query.js';
+  options
+} from '@/api/config';
 
 /**
  * jsonp 抓取推荐页轮播图数据
@@ -17,7 +17,7 @@ export function getRecommend() {
     uin: 0,
     needNewCode: 1
   });
-  return jsonp(url, data, opts);
+  return jsonp(url, data, options);
 }
 
 export function getList() {
@@ -51,8 +51,9 @@ export function getList() {
  * 提供方：https://y.qq.com/n/yqq/playlist/1471714611.html#
  */
 export function getSongList(disstid) {
-  let url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
-  let data = Object.assign({}, commonParams, {
+  const url = '/api/recommendSong'
+
+  const data = Object.assign({}, commonParams, {
     disstid,
     type: 1,
     json: 1,
@@ -62,9 +63,9 @@ export function getSongList(disstid) {
     hostUin: 0,
     needNewCode: 0
   })
-  let opts = Object.assign({}, opts, {
-    param: 'jsonpCallback',
-    name: 'playlistinfoCallback'
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
   })
-  return jsonp(url, data, opts)
 }

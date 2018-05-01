@@ -1,8 +1,8 @@
 import jsonp from '@/common/js/jsonp';
 import {
   commonParams,
-  opts
-} from '@/api/common-query.js';
+  options
+} from '@/api/config';
 
 /**
  * jsonp 抓取排行页数据
@@ -17,5 +17,5 @@ export function getRankList() {
     format: 'h5',
     needNewCode: 1
   });
-  return jsonp(url, data, opts);
+  return jsonp(url, data, options);
 }

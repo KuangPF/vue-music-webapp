@@ -8,6 +8,8 @@
 import { mapGetters } from 'vuex';
 import MyMusicList from '@/components/MyMusicList/MyMusicList';
 import { getSongList } from '@/api/recommend.js';
+import { createSong } from '../../common/js/song';
+import { ERR_OK } from '../../api/config';
 export default {
   components: {
     MyMusicList
@@ -28,14 +30,30 @@ export default {
   methods: {
     _getSongList() {
       // 禁止直接刷新详情页(获取不到歌单 id)
+      let _this = this;
       if (!this.songlist.dissid) {
         this.$router.push('/recommend');
         return; // eslint-disable-line
-      }
+      };
       console.log(this.songlist.dissid);
-      getSongList(this.songlist.dissid).then(res => {
-        console.log(res);
+      function jsonCallback(result) { // eslint-disable-line
+        if (result.code === ERR_OK) {
+          _this.songs = _this._normalizeSongs(result.cdlist[0].songlist);
+        };
+      }
+      getSongList(this.songlist.dissid).then((res) => {
+        eval(res); //eslint-disable-line
       });
+    },
+    _normalizeSongs(list) {
+      let ret = [];
+      list.forEach((musicData) => {
+        if (musicData.songid && musicData.albumid) {
+          ret.push(createSong(musicData));
+        };
+      });
+      console.log(ret);
+      return ret;
     }
   },
   created() {

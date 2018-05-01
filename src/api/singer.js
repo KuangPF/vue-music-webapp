@@ -1,8 +1,8 @@
 import jsonp from '@/common/js/jsonp';
 import {
   commonParams,
-  opts
-} from '@/api/common-query.js';
+  options
+} from '@/api/config';
 
 /**
  * jsonp 抓取歌手页数据
@@ -21,5 +21,5 @@ export function getSingerList() {
     platform: 'yqq',
     needNewCode: 0
   });
-  return jsonp(url, data, opts);
+  return jsonp(url, data, options);
 }
