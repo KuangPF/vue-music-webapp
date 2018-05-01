@@ -18,6 +18,11 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  methods: {
+    getDesc(item) {
+      return `${item.singer} - ${item.album}`;
+    }
   }
 };
 </script>

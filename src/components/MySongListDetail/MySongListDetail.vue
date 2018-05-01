@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      songs: []
     };
   },
   computed: {
@@ -52,7 +53,6 @@ export default {
           ret.push(createSong(musicData));
         };
       });
-      console.log(ret);
       return ret;
     }
   },
