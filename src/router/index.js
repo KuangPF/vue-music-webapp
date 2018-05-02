@@ -24,6 +24,11 @@ const MyRank = (resolve) => {
     resolve(module);
   });
 };
+const MyRankDetail = (resolve) => {
+  import ('@/components/MyRankDetail/MyRankDetail').then((module) => {
+    resolve(module);
+  });
+};
 const MySearch = (resolve) => {
   import ('@/components/MySearch/MySearch').then((module) => {
     resolve(module);
@@ -68,7 +73,12 @@ export default new Router({
   }, {
     path: '/rank',
     name: 'rank',
-    component: MyRank
+    component: MyRank,
+    children: [{
+      path: ':id',
+      name: 'rankDetail',
+      component: MyRankDetail
+    }]
   }, {
     path: '/search',
     name: 'search',

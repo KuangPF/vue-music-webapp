@@ -3,7 +3,7 @@
     <!-- 排行榜数据 -->
     <my-scroll ref="scrollRef" :data="toplist" class="toplist">
       <ul>
-        <li class="item" v-for="(item,index) in toplist" :key="index">
+        <li class="item" v-for="(item,index) in toplist" :key="index" @click="selectItem(item)">
           <!-- 左图 -->
           <div class="icon">
             <img width="100" height="100" v-lazy="item.picUrl" @load="loadImg">
@@ -60,6 +60,12 @@ export default {
         this.$refs.scrollRef.refresh();
         this.flag = true;
       }
+    },
+
+    selectItem(item) {
+      this.$router.push({
+        path: `/rank/${item.id}`
+      });
     }
   }
 };
