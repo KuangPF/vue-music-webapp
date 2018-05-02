@@ -14,7 +14,7 @@
     <div class="bg-layer" ref="layer"></div>
     <my-scroll @scroll="scroll" class="list" ref="list" :data="songs" :probe-type="probeType" :listen-scroll="listenScroll">
       <div class="song-list-wrapper">
-        <my-song-list :songs="songs">
+        <my-song-list :songs="songs" :rank="rank">
         </my-song-list>
       </div>
       <!-- loading 组件 -->
@@ -65,6 +65,10 @@ export default {
     songs: {
       type: Array,
       default: () => []
+    },
+    rank: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
