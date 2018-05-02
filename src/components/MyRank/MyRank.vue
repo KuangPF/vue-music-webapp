@@ -24,13 +24,16 @@
         <my-loading></my-loading>
       </div>
     </my-scroll>
+    <router-view></router-view>
   </div>
+
 </template>
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { getRankList } from '@/api/rank.js';
+import { mapMutations } from 'vuex';
 export default {
   components: {
     MyScroll,
@@ -46,6 +49,9 @@ export default {
     this._getRankList();
   },
   methods: {
+    ...mapMutations({
+      setRankList: 'SET_RANKLIST'
+    }),
     _getRankList() {
       getRankList().then((res) => {
         if (res.code === 0) {
@@ -66,6 +72,7 @@ export default {
       this.$router.push({
         path: `/rank/${item.id}`
       });
+      this.setRankList(item);
     }
   }
 };

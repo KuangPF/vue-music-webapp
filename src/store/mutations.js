@@ -6,6 +6,9 @@ const mutations = {
   },
   [types.SET_SINGER](state, singer) {
     state.singer = singer;
+  },
+  [types.SET_RANKLIST](state, rankList) {
+    state.rankList = rankList;
   }
 };
 

@@ -6,9 +6,26 @@
 
 <script>
 import MyMusicList from '@/components/MyMusicList/MyMusicList';
+import { getMusicList } from '@/api/rank'; // eslint-disable-line
+import { mapGetters } from 'vuex';
 export default {
   components: {
     MyMusicList
+  },
+  created() {
+    this._getMusicList();
+  },
+  computed: {
+    ...mapGetters(['rankList'])
+  },
+  methods: {
+    _getMusicList() {
+      if (!this.rankList.id) {
+        console.log('sss');
+        this.$router.push('/rank');
+        return; // eslint-disable-line
+      }
+    }
   }
 };
 </script>
