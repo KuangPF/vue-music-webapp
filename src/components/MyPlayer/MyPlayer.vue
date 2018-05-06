@@ -1,5 +1,5 @@
 <template>
-  <div class="my-player" v-show="false">
+  <div class="my-player" v-show="playlist.length > 0">
     <!-- 全屏播放器 -->
     <transition name="normal">
 
@@ -11,8 +11,11 @@
 </template>
 
 <script>
+// import mapGetters from 'vuex';
 export default {
-
+  computed: {
+    // ...mapGetters(['playlist'])
+  }
 };
 </script>
 

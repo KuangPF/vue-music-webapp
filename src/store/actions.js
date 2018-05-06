@@ -1,5 +1,6 @@
 import * as types from './mutations-type';
 
+// 选择歌曲播放
 export const selectPlay = function ({
   commit,
   state
@@ -13,4 +14,6 @@ export const selectPlay = function ({
   } else {
     commit(types.SET_PLAYLIST, list);
   }
+  commit(types.SET_SEQUENCE_LIST, list);
+  commit(types.SET_CURRENT_INDEX, index);
 };

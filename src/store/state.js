@@ -17,6 +17,10 @@ const state = {
   fullScreen: false,
   // 播放歌曲列表
   playlist: [],
+  // 顺序播放列表
+  sequenceList: [],
+  // 当前播放歌曲索引
+  currentIndex: -1,
   // 播放模式
   mode: playMode.sequence
 
