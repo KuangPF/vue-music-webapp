@@ -5,17 +5,20 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
+    <my-player></my-player>
   </div>
 </template>
 
 <script>
 import MyHeader from '@/components/MyHeader/MyHeader'; // eslint-disable-line
 import MyTab from '@/components/MyTab/MyTab';
+import MyPlayer from '@/components/MyPlayer/MyPlayer';
 export default {
   name: 'App',
   components: {
     MyHeader,
-    MyTab
+    MyTab,
+    MyPlayer
   }
 };
 </script>
