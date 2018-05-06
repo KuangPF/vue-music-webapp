@@ -1,5 +1,9 @@
 <template>
-  <div class="my-player">
+  <div class="my-player" v-show="false">
+    <!-- 全屏播放器 -->
+    <transition name="normal">
+
+    </transition>
     <div class="normal-player">
       普通播放器
     </div>

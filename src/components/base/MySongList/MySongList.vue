@@ -1,7 +1,7 @@
 <template>
   <div class="my-song-list">
     <ul>
-      <li v-for="(item,index) in songs" class="item" :key="index">
+      <li v-for="(item,index) in songs" class="item" :key="index" @click="selectItem(item,index)">
         <div class="rank" v-show="rank">
           <div :class="getRankCls(index)">{{getRankText(index)}}</div>
         </div>
@@ -41,6 +41,9 @@ export default {
       if (index > 2) {
         return index + 1;
       }
+    },
+    selectItem(item, index) {
+      this.$emit('select', item, index);
     }
   }
 };
@@ -68,13 +71,13 @@ export default {
         height: 24px;
         background-size: 25px 24px;
         &.icon0 {
-          @include bg-image('first')
+          @include bg-image("first");
         }
         &.icon1 {
-          @include bg-image('second')
+          @include bg-image("second");
         }
         &.icon2 {
-          @include bg-image('third')
+          @include bg-image("third");
         }
       }
       .text {

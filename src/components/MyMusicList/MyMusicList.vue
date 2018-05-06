@@ -14,7 +14,7 @@
     <div class="bg-layer" ref="layer"></div>
     <my-scroll @scroll="scroll" class="list" ref="list" :data="songs" :probe-type="probeType" :listen-scroll="listenScroll">
       <div class="song-list-wrapper">
-        <my-song-list :songs="songs" :rank="rank">
+        <my-song-list :songs="songs" :rank="rank" @select="selectItem">
         </my-song-list>
       </div>
       <!-- loading 组件 -->
@@ -30,6 +30,7 @@ import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
 import MySongList from '@/components/base/MySongList/MySongList';
 import { prefixStyle } from '../../common/js/dom';
+import { mapActions } from 'vuex';
 
 const TRANSFORM = prefixStyle('transform');
 const RESERVED_HEIGHT = 40;
@@ -72,11 +73,18 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['selectPlay']),
     back() {
       this.$router.back();
     },
     scroll(pos) {
       this.scrollY = pos.y;
+    },
+    selectItem(item, index) {
+      this.selectPlay({
+        list: this.songs,
+        index
+      });
     }
   },
   watch: {
