@@ -11,10 +11,15 @@
 </template>
 
 <script>
-// import mapGetters from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   computed: {
-    // ...mapGetters(['playlist'])
+    ...mapGetters(['playlist'])
+  },
+  methods: {
+    ...mapMutations({
+      setPlayList: 'SET_PLAYLIST'
+    })
   }
 };
 </script>
