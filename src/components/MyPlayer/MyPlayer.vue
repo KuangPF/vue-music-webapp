@@ -9,6 +9,12 @@
       <div class="background">
         <img :src="currentSong.image" width="100%" height="100%">
       </div>
+      <!-- 顶部 -->
+      <div class="top">
+        <div class="mini-to-player" @click="miniToPlayer">
+          <i class="icon-back"></i>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -22,7 +28,10 @@ export default {
   methods: {
     ...mapMutations({
       setPlayList: 'SET_PLAYLIST'
-    })
+    }),
+    miniToPlayer() {
+      console.log('播放器最小化');
+    }
   }
 };
 </script>
