@@ -7,7 +7,7 @@
     <div class="normal-player">
       <!-- 背景图 -->
       <div class="background">
-        <img :src="currentSong.img" width="1000%" height="100%">
+        <img :src="currentSong.image" width="100%" height="100%">
       </div>
     </div>
   </div>
