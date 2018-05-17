@@ -5,7 +5,10 @@
 
     </transition>
     <div class="normal-player">
-      普通播放器
+      <!-- 背景图 -->
+      <div class="background">
+        <img :src="currentSong.img" width="1000%" height="100%">
+      </div>
     </div>
   </div>
 </template>
@@ -14,7 +17,7 @@
 import { mapGetters, mapMutations } from 'vuex';
 export default {
   computed: {
-    ...mapGetters(['playlist'])
+    ...mapGetters(['playlist', 'currentSong'])
   },
   methods: {
     ...mapMutations({
