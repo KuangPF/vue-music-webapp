@@ -21,7 +21,7 @@
         <div class="middle-l" ref="middeleL">
           <div class="cd-warpper">
             <div class="cd">
-              <img class="image play" :src="currentSong.image">
+              <img class="image" :src="currentSong.image" :class="cdCls">
             </div>
           </div>
         </div>
@@ -34,7 +34,10 @@
 import { mapGetters, mapMutations } from 'vuex';
 export default {
   computed: {
-    ...mapGetters(['playlist', 'currentSong'])
+    ...mapGetters(['playlist', 'currentSong', 'playing']),
+    cdCls() {
+      return this.playing ? 'play' : '';
+    }
   },
   methods: {
     ...mapMutations({

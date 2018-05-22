@@ -78,14 +78,14 @@
             & .play {
               animation: rotate 20s linear infinite;
             }
-          }
-          .image {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+            .image {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
           }
         }
       }
