@@ -33,6 +33,21 @@
           transform: rotate(-90deg);
         }
       }
+      .title {
+        width: 70%;
+        margin: 0 auto;
+        line-height: 40px;
+        text-align: center;
+        @include no-wrap();
+        font-size: $font-size-large;
+        color: $color-text;
+      }
+      .subtitle {
+        line-height: 20px;
+        text-align: center;
+        font-size: $font-size-medium;
+        color: $color-text;
+      }
     }
   }
 }

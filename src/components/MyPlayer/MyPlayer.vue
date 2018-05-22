@@ -14,6 +14,8 @@
         <div class="mini-to-player" @click="miniToPlayer">
           <i class="icon-back"></i>
         </div>
+        <h1 v-html="currentSong.name" class="title"></h1>
+        <h1 v-html="currentSong.singer" class="subtitle"></h1>
       </div>
     </div>
   </div>
