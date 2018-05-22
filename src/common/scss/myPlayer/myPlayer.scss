@@ -75,6 +75,9 @@
             box-sizing: border-box;
             border: 10px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
+            & .play {
+              animation: rotate 20s linear infinite;
+            }
           }
           .image {
             position: absolute;
@@ -87,5 +90,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

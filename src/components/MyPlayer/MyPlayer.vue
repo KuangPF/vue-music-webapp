@@ -21,7 +21,7 @@
         <div class="middle-l" ref="middeleL">
           <div class="cd-warpper">
             <div class="cd">
-              <img class="image" :src="currentSong.image">
+              <img class="image play" :src="currentSong.image">
             </div>
           </div>
         </div>
