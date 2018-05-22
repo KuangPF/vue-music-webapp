@@ -17,6 +17,15 @@
         <h1 v-html="currentSong.name" class="title"></h1>
         <h1 v-html="currentSong.singer" class="subtitle"></h1>
       </div>
+      <div class="middle">
+        <div class="middle-l" ref="middeleL">
+          <div class="cd-warpper">
+            <div class="cd">
+              <img class="image" :src="currentSong.image">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
