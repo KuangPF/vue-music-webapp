@@ -24,6 +24,11 @@
               <img class="image" :src="currentSong.image" :class="cdCls">
             </div>
           </div>
+          <div class="playing-lyric-wrapper">
+            <div class="playing-lyric">
+              {{playingLyric}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -33,6 +38,11 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 export default {
+  data() {
+    return {
+      playingLyric: ''
+    };
+  },
   computed: {
     ...mapGetters(['playlist', 'currentSong', 'playing']),
     cdCls() {
