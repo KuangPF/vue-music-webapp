@@ -37,6 +37,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import Lyric from 'lyric-parser'; // eslint-disable-line
 export default {
   data() {
     return {
