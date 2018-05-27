@@ -75,8 +75,11 @@
             box-sizing: border-box;
             border: 10px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            & .play {
-              /* animation: rotate 20s linear infinite; */
+            &.play {
+              animation: rotate 20s linear infinite;
+            }
+            &.pause {
+              animation-play-state: paused;
             }
             .image {
               position: absolute;
@@ -213,6 +216,12 @@
       flex: 0 0 40px;
       width: 40px;
       padding: 0 10px 0 20px;
+      &.play {
+        animation: rotate 20s linear infinite;
+      }
+      &.pause {
+        animation-play-state: paused;
+      }
       img {
         border-radius: 50%;
       }
