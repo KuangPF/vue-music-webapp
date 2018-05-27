@@ -31,19 +31,45 @@
           </div>
         </div>
       </div>
+      <div class="bottom">
+        <div class="dot-wrapper">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="progress-wrapper">
+
+        </div>
+        <div class="operators">
+          <div class="icon i-left">
+            <i></i>
+          </div>
+          <div class="icon i-left">
+            <i class="icon-prev"></i>
+          </div>
+          <div class="icon i-center">
+            <i></i>
+          </div>
+          <div class="icon i-right">
+            <i class="icon-next "></i>
+          </div>
+          <div class="icon i-right ">
+            <i class="icon "></i>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mini-player" v-show="!fullScreen" @click="open">
-      <div class="icon">
-        <img :class="cdCls" width="40" height="40" :src="currentSong.image">
+    <div class="mini-player " v-show="!fullScreen " @click="open ">
+      <div class="icon ">
+        <img :class="cdCls " width="40 " height="40 " :src="currentSong.image ">
       </div>
-      <div class="text">
-        <h2 class="name" v-html="currentSong.name"></h2>
-        <p class="desc" v-html="currentSong.singer"></p>
+      <div class="text ">
+        <h2 class="name " v-html="currentSong.name "></h2>
+        <p class="desc " v-html="currentSong.singer "></p>
       </div>
-      <div class="control">
+      <div class="control ">
       </div>
-      <div class="control">
-        <i class="icon-playlist"></i>
+      <div class="control ">
+        <i class="icon-playlist "></i>
       </div>
     </div>
   </div>
