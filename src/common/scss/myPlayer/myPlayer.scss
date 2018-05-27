@@ -213,6 +213,9 @@
       flex: 0 0 40px;
       width: 40px;
       padding: 0 10px 0 20px;
+      img {
+        border-radius: 50%;
+      }
     }
     .text {
       display: flex;

@@ -73,7 +73,7 @@
         </div>
       </div>
     </transition>
-
+    <audio :src="currentSong.url" ref="audio"></audio>
   </div>
 </template>
 
@@ -94,6 +94,13 @@ export default {
     ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing']),
     cdCls() {
       return this.playing ? 'play' : '';
+    }
+  },
+  watch: {
+    currentSong() {
+      this.$nextTick(() => {
+        this.$refs.audio.play();
+      });
     }
   },
   methods: {
