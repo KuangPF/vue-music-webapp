@@ -43,8 +43,6 @@ export default {
       }
     },
     selectItem(item, index) {
-      console.log(item);
-      item.url = item.url.replace('ws', 'dl'); // fix 403
       this.$emit('select', item, index);
     }
   }

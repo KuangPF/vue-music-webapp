@@ -42,13 +42,13 @@
               <i class="icon-sequence"></i>
             </div>
             <div class="icon i-left">
-              <i class="icon-prev"></i>
+              <i @click="prev" class="icon-prev"></i>
             </div>
             <div class="icon i-center">
               <i @click="togglePlaying" :class="playIcon"></i>
             </div>
             <div class="icon i-right">
-              <i class="icon-next "></i>
+              <i @click="next" class="icon-next "></i>
             </div>
             <div class="icon i-right ">
               <i class="icon icon-not-favorite"></i>
@@ -92,7 +92,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing']),
+    ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing', 'currentIndex']),
     cdCls() {
       return this.playing ? 'play' : 'play pause';
     },
@@ -119,7 +119,8 @@ export default {
   methods: {
     ...mapMutations({
       setFullScreen: 'SET_FULL_SCREEN',
-      setPlaying: 'SET_PLAYING_STATE'
+      setPlayingState: 'SET_PLAYING_STATE',
+      setCurrentIndex: 'SET_CURRENT_INDEX'
     }),
     miniToPlayer() {
       this.setFullScreen(false);
@@ -164,6 +165,29 @@ export default {
       this.$refs.cdWrapper.style.transition = '';
       this.$refs.cdWrapper.style[transform] = '';
     },
+    togglePlaying() {
+      this.setPlayingState(!this.playing);
+    },
+    prev() {
+      let index = this.currentIndex - 1;
+      if (index < 0) {
+        index = this.playlist.lenght - 1;
+      }
+      if (!this.playing) {
+        this.togglePlaying();
+      }
+      this.setCurrentIndex(index);
+    },
+    next() {
+      let index = this.currentIndex + 1;
+      if (index > this.playlist.length) {
+        index = 0;
+      }
+      if (!this.playing) {
+        this.togglePlaying();
+      }
+      this.setCurrentIndex(index);
+    },
     _getPostAndScale() {
       const targetWidth = 40;
       const paddingLeft = 40;
@@ -178,9 +202,6 @@ export default {
         y,
         scale
       };
-    },
-    togglePlaying() {
-      this.setPlaying(!this.playing);
     }
   }
 };
