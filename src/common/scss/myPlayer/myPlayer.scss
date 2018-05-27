@@ -180,6 +180,24 @@
         }
       }
     }
+    &.normal-enter-active,
+    &.normal-leave-active {
+      transition: all 0.4s;
+      .top,
+      .bottom {
+        transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32);
+      }
+    }
+    &.normal-enter,
+    &.normal-leave-to {
+      opacity: 0;
+      .top {
+        transform: translate3d(0, -100px, 0);
+      }
+      .bottom {
+        transform: translate3d(0, 100px, 0);
+      }
+    }
   }
   .mini-player {
     display: flex;
@@ -231,6 +249,14 @@
         left: 0;
         top: 0
       }
+    }
+    &.mini-enter-active,
+    &.mini-leave-active {
+      transition: all 0.4s;
+    }
+    &.mini-enter,
+    &.mini-leave-to {
+      opacity: 0;
     }
   }
 }
