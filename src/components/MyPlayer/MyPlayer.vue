@@ -4,7 +4,7 @@
     <transition name="normal">
 
     </transition>
-    <div class="normal-player">
+    <div class="normal-player" v-show="fullScreen">
       <!-- 背景图 -->
       <div class="background">
         <img :src="currentSong.image" width="100%" height="100%">
@@ -32,6 +32,20 @@
         </div>
       </div>
     </div>
+    <div class="mini-player" v-show="!fullScreen" @click="open">
+      <div class="icon">
+        <img :class="cdCls" width="40" height="40" :src="currentSong.image">
+      </div>
+      <div class="text">
+        <h2 class="name" v-html="currentSong.name"></h2>
+        <p class="desc" v-html="currentSong.singer"></p>
+      </div>
+      <div class="control">
+      </div>
+      <div class="control">
+        <i class="icon-playlist"></i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,17 +59,20 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['playlist', 'currentSong', 'playing']),
+    ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing']),
     cdCls() {
       return this.playing ? 'play' : '';
     }
   },
   methods: {
     ...mapMutations({
-      setPlayList: 'SET_PLAYLIST'
+      setFullScreen: 'SET_FULL_SCREEN'
     }),
     miniToPlayer() {
-      console.log('播放器最小化');
+      this.setFullScreen(false);
+    },
+    open() {
+      this.setFullScreen(true);
     }
   }
 };
