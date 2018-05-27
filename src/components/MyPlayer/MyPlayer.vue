@@ -74,7 +74,7 @@
         </div>
       </div>
     </transition>
-    <audio :src="currentSong.url" ref="audio"></audio>
+    <audio :src="currentSong.url" ref="audio" @canplay="ready"></audio>
   </div>
 </template>
 
@@ -88,7 +88,8 @@ const transform = prefixStyle('transform');
 export default {
   data() {
     return {
-      playingLyric: ''
+      playingLyric: '',
+      songReady: false
     };
   },
   computed: {
@@ -169,24 +170,36 @@ export default {
       this.setPlayingState(!this.playing);
     },
     prev() {
+      if (!this.songReady) {
+        return;
+      }
       let index = this.currentIndex - 1;
       if (index < 0) {
-        index = this.playlist.lenght - 1;
+        index = this.playlist.length - 1;
       }
+      console.log(index);
+      this.setCurrentIndex(index);
       if (!this.playing) {
         this.togglePlaying();
       }
-      this.setCurrentIndex(index);
+      this.songReady = true;
     },
     next() {
+      if (!this.songReady) {
+        return;
+      }
       let index = this.currentIndex + 1;
-      if (index > this.playlist.length) {
+      if (index > this.playlist.length - 1) {
         index = 0;
       }
       if (!this.playing) {
         this.togglePlaying();
       }
       this.setCurrentIndex(index);
+      this.songReady = true;
+    },
+    ready() {
+      this.songReady = true;
     },
     _getPostAndScale() {
       const targetWidth = 40;
