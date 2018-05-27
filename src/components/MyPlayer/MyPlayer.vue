@@ -41,19 +41,19 @@
         </div>
         <div class="operators">
           <div class="icon i-left">
-            <i></i>
+            <i class="icon-sequence"></i>
           </div>
           <div class="icon i-left">
             <i class="icon-prev"></i>
           </div>
           <div class="icon i-center">
-            <i></i>
+            <i class="icon-pause"></i>
           </div>
           <div class="icon i-right">
             <i class="icon-next "></i>
           </div>
           <div class="icon i-right ">
-            <i class="icon "></i>
+            <i class="icon icon-not-favorite"></i>
           </div>
         </div>
       </div>
