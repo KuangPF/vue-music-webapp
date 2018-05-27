@@ -246,8 +246,10 @@
       }
     }
     .control {
+      position: relative;
       flex: 0 0 30px;
       width: 30px;
+      height: 30px;
       padding: 0 10px;
       .icon-play-mini,
       .icon-pause-mini,

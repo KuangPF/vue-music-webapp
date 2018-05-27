@@ -60,16 +60,17 @@
     <transition name="mini">
       <div class="mini-player " v-show="!fullScreen " @click="open ">
         <div class="icon" :class="cdCls">
-          <img width="40" height="40 " :src="currentSong.image ">
+          <img width="40" height="40" :src="currentSong.image ">
         </div>
-        <div class="text ">
+        <div class="text">
           <h2 class="name " v-html="currentSong.name "></h2>
           <p class="desc " v-html="currentSong.singer "></p>
         </div>
-        <div class="control ">
+        <div class="control">
+          <i class="icon-mini" @click.stop="togglePlaying" :class="miniIcon"></i>
         </div>
-        <div class="control ">
-          <i class="icon-playlist "></i>
+        <div class="control">
+          <i class="icon-playlist"></i>
         </div>
       </div>
     </transition>
@@ -97,6 +98,9 @@ export default {
     },
     playIcon() {
       return this.playing ? 'icon-pause' : 'icon-play';
+    },
+    miniIcon() {
+      return this.playing ? 'icon-pause-mini' : 'icon-play-mini';
     }
   },
   watch: {
