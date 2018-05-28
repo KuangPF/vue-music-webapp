@@ -71,7 +71,9 @@
           <p class="desc " v-html="currentSong.singer "></p>
         </div>
         <div class="control">
-          <i class="icon-mini" @click.stop="togglePlaying" :class="miniIcon"></i>
+          <my-progress-circle :radius="radius" :percent="percent" class="progress-circle">
+            <i class="icon-mini" @click.stop="togglePlaying" :class="miniIcon"></i>
+          </my-progress-circle>
         </div>
         <div class="control">
           <i class="icon-playlist"></i>
@@ -88,6 +90,7 @@ import Lyric from 'lyric-parser'; // eslint-disable-line
 import animations from 'create-keyframe-animation';
 import { prefixStyle } from '@/common/js/dom';
 import MyProgressBar from '@/components/base/MyProgressBar/MyProgressBar';
+import MyProgressCircle from '@/components/base/MyProgressCircle/MyProgressCircle';
 
 const transform = prefixStyle('transform');
 export default {
@@ -95,11 +98,13 @@ export default {
     return {
       playingLyric: '',
       songReady: false,
-      currentTime: 0
+      currentTime: 0,
+      radius: 32
     };
   },
   components: {
-    MyProgressBar
+    MyProgressBar,
+    MyProgressCircle
   },
   computed: {
     ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing', 'currentIndex']),

@@ -257,11 +257,14 @@
         font-size: 30px;
         color: $color-theme-d;
       }
-      .icon-mini {
-        font-size: 32px;
-        position: absolute;
-        left: 0;
-        top: 0
+      .progress-circle {
+        position: relative;
+        .icon-mini {
+          font-size: 32px;
+          position: absolute;
+          left: 0;
+          top: 0
+        }
       }
     }
     &.mini-enter-active,
