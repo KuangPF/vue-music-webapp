@@ -91,6 +91,7 @@ import animations from 'create-keyframe-animation';
 import { prefixStyle } from '@/common/js/dom';
 import MyProgressBar from '@/components/base/MyProgressBar/MyProgressBar';
 import MyProgressCircle from '@/components/base/MyProgressCircle/MyProgressCircle';
+import { playMode } from '../../common/js/config';
 
 const transform = prefixStyle('transform');
 export default {
@@ -113,6 +114,9 @@ export default {
     },
     disableCls() {
       return this.songReady ? '' : 'disable';
+    },
+    iconMode() {
+      return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random';
     },
     playIcon() {
       return this.playing ? 'icon-pause' : 'icon-play';
