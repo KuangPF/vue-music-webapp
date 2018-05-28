@@ -10,7 +10,10 @@ const mutations = {
   [types.SET_RANKLIST](state, rankList) {
     state.rankList = rankList;
   },
-  [types.SET_PLAYING_STATE](state, flag) {
+  [types.SET_PLAYING_STATE](state, mode) {
+    state.playing = mode;
+  },
+  [types.SET_PLAY_MODE](state, flag) {
     state.playing = flag;
   },
   [types.SET_FULL_SCREEN](state, flag) {

@@ -43,7 +43,7 @@
           </div>
           <div class="operators">
             <div class="icon i-left">
-              <i class="icon-sequence"></i>
+              <i :class="iconMode"></i>
             </div>
             <div class="icon i-left" :class="disableCls">
               <i @click="prev" class="icon-prev"></i>
@@ -107,7 +107,7 @@ export default {
     MyProgressCircle
   },
   computed: {
-    ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing', 'currentIndex']),
+    ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing', 'currentIndex', 'mode']),
     cdCls() {
       return this.playing ? 'play' : 'play pause';
     },
@@ -141,7 +141,8 @@ export default {
     ...mapMutations({
       setFullScreen: 'SET_FULL_SCREEN',
       setPlayingState: 'SET_PLAYING_STATE',
-      setCurrentIndex: 'SET_CURRENT_INDEX'
+      setCurrentIndex: 'SET_CURRENT_INDEX',
+      setPlayMode: 'SET_PLAY_MODE'
     }),
     miniToPlayer() {
       this.setFullScreen(false);

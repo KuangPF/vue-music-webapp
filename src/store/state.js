@@ -1,9 +1,6 @@
-const playMode = {
-  sequence: 0, // 顺序播放
-  loop: 1, // 单曲循环
-  random: 2 // 随机播放
-};
-
+import {
+  playMode
+} from '../common/js/config';
 const state = {
   // 推荐页歌单
   songlist: {},
