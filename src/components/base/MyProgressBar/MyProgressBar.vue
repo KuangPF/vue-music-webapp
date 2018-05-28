@@ -24,6 +24,12 @@ export default {
     this.touch = {};
   },
   methods: {
+    clickProgress(e) {
+      const rect = this.$refs.progressBar.getBoundingClientRect();
+      const offsetWidth = e.pageX - rect.left;
+      this._offset(offsetWidth);
+      this._triggerPercent();
+    },
     progressTouchStart(e) {
       this.touch.initiated = true;
       this.touch.startX = e.touches[0].pageX;
