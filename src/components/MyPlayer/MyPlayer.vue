@@ -42,7 +42,7 @@
             <span class="time time-r">{{format(currentSong.duration)}}</span>
           </div>
           <div class="operators">
-            <div class="icon i-left">
+            <div class="icon i-left" @click="changeMode">
               <i :class="iconMode"></i>
             </div>
             <div class="icon i-left" :class="disableCls">
@@ -247,6 +247,10 @@ export default {
         num = '0' + num;
       }
       return num;
+    },
+    changeMode() {
+      let mode = (this.mode + 1) % 3;
+      this.setPlayMode(mode);
     },
     _getPostAndScale() {
       const targetWidth = 40;
