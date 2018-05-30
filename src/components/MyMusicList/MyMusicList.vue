@@ -7,6 +7,12 @@
     <!-- 顶部歌手名字 -->
     <div v-html="title" class="title"></div>
     <div class="bg-image" :style="bgStyle" ref="bgImage">
+      <div class="play-wrapper">
+        <div ref="playBtn" v-show="songs.length>0" class="play">
+          <i class="icon-play"></i>
+          <span class="text">随机播放全部</span>
+        </div>
+      </div>
       <!--蒙层 -->
       <div class="filter"></div>
     </div>
