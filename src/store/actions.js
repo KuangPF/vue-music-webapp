@@ -20,3 +20,12 @@ export const selectPlay = function ({
   commit(types.SET_SEQUENCE_LIST, list);
   commit(types.SET_CURRENT_INDEX, index);
 };
+
+// 随机播放
+export const randomPlay = function ({
+  commit
+}, {
+  list
+}) {
+  commit(types.SET_PLAY_MODE, playMode.random);
+};
