@@ -194,7 +194,17 @@ export default {
     togglePlaying() {
       this.setPlayingState(!this.playing);
     },
-    end() {},
+    end() {
+      if (this.mode === playMode.loop) {
+        this.loop();
+      } else {
+        this.next();
+      }
+    },
+    loop() {
+      this.$refs.audio.currentTime = 0;
+      this.$refs.audio.play();
+    },
     prev() {
       if (!this.songReady) {
         return;
