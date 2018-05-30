@@ -80,7 +80,7 @@
         </div>
       </div>
     </transition>
-    <audio :src="currentSong.url" ref="audio" @canplay="ready" @timeupdate="updateTime"></audio>
+    <audio :src="currentSong.url" ref="audio" @canplay="ready" @timeupdate="updateTime" @ended="end"></audio>
   </div>
 </template>
 
@@ -194,6 +194,7 @@ export default {
     togglePlaying() {
       this.setPlayingState(!this.playing);
     },
+    end() {},
     prev() {
       if (!this.songReady) {
         return;
