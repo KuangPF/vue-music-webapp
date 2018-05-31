@@ -28,6 +28,15 @@
               </div>
             </div>
           </div>
+          <my-scroll class="middle-r" ref="lyricList" :data="currentLyric&&currentLyric.lines">
+            <div class="lyric-wrapper">
+              <div v-if="currentLyric">
+                <p ref="lyricLine" class="text" v-for="(line,index) in currentLyric.lines" :class="{'current':currentLineNum===index}" :key="index">
+                  {{line.txt}}
+                </p>
+              </div>
+            </div>
+          </my-scroll>
         </div>
         <div class="bottom">
           <div class="dot-wrapper">
@@ -92,6 +101,7 @@ import { prefixStyle } from '@/common/js/dom';
 import MyProgressBar from '@/components/base/MyProgressBar/MyProgressBar';
 import MyProgressCircle from '@/components/base/MyProgressCircle/MyProgressCircle';
 import { playMode } from '../../common/js/config';
+import MyScroll from '@/components/base/MyScroll/MyScroll';
 
 const transform = prefixStyle('transform');
 export default {
@@ -99,6 +109,7 @@ export default {
     return {
       playingLyric: '',
       currentLyric: null,
+      currentLineNum: 0,
       songReady: false,
       currentTime: 0,
       radius: 32
@@ -106,7 +117,8 @@ export default {
   },
   components: {
     MyProgressBar,
-    MyProgressCircle
+    MyProgressCircle,
+    MyScroll
   },
   computed: {
     ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing', 'currentIndex', 'mode']),
@@ -152,9 +164,20 @@ export default {
     }),
     getLyric() {
       this.currentSong.getLyric().then((lyric) => {
-        this.currentLyric = new Lyric(lyric);
-        console.log(this.currentLyric);
+        this.currentLyric = new Lyric(lyric, this.handleLyric);
+        if (this.playing) {
+          this.currentLyric.play();
+        }
       });
+    },
+    handleLyric({ lineNum, txt }) {
+      this.currentLineNum = lineNum;
+      if (lineNum > 5) {
+        let lineEl = this.$refs.lyricLine[lineNum - 5];
+        this.$refs.lyricList.scrollToElement(lineEl, 1000);
+      } else {
+        this.$refs.lyricList.scrollTo(0, 0, 1000);
+      }
     },
     miniToPlayer() {
       this.setFullScreen(false);
