@@ -15,7 +15,7 @@
           <h1 v-html="currentSong.name" class="title"></h1>
           <h1 v-html="currentSong.singer" class="subtitle"></h1>
         </div>
-        <div class="middle">
+        <div class="middle" @touchstart.prevent="middleTouchStart" @touchmove.prevent="middleTouchMove" @touchend="middleTouchEnd">
           <div class="middle-l" ref="middeleL">
             <div class="cd-warpper" ref="cdWrapper">
               <div class="cd" :class="cdCls">
@@ -40,8 +40,8 @@
         </div>
         <div class="bottom">
           <div class="dot-wrapper">
-            <span class="dot"></span>
-            <span class="dot"></span>
+            <span class="dot" :class="{'active':currentShow==='cd'}"></span>
+            <span class="dot" :class="{'active':currentShow==='lyric'}"></span>
           </div>
           <div class="progress-wrapper">
             <span class="time time-l">{{format(currentTime)}}</span>
@@ -110,6 +110,7 @@ export default {
       playingLyric: '',
       currentLyric: null,
       currentLineNum: 0,
+      currentShow: 'cd',
       songReady: false,
       currentTime: 0,
       radius: 32
@@ -119,6 +120,9 @@ export default {
     MyProgressBar,
     MyProgressCircle,
     MyScroll
+  },
+  created() {
+    this.touch = {};
   },
   computed: {
     ...mapGetters(['playlist', 'fullScreen', 'currentSong', 'playing', 'currentIndex', 'mode']),
@@ -178,6 +182,30 @@ export default {
       } else {
         this.$refs.lyricList.scrollTo(0, 0, 1000);
       }
+    },
+    middleTouchStart(e) {
+      this.touch.initiated = true;
+      const touch = e.touches[0];
+      this.touch.startX = touch.pageX;
+      this.touch.startY = touch.pageY;
+    },
+    middleTouchMove(e) {
+      if (!this.touch.initiated) {
+        return; // eslint-disable-line
+      }
+      const touch = e.touches[0];
+      const deltaX = touch.pageX - this.touch.startX;
+      const deltaY = touch.pageY - this.touch.startY;
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        return;
+      }
+      const left = this.currentShow === 'cd' ? 0 : -window.innerWidth;
+      const offsetWidth = Math.min(0, Math.max(-window.innerWidth, left + deltaX));
+      this.touch.percent = Math.abs(offsetWidth / window.innerWidth);
+      this.$refs.lyricList.$el.style[transform] = `translate3d(${offsetWidth}px,0,0)`;
+    },
+    middleTouchEnd(e) {
+
     },
     miniToPlayer() {
       this.setFullScreen(false);
