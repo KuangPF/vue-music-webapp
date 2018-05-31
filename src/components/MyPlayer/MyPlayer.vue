@@ -86,7 +86,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import Lyric from 'lyric-parser'; // eslint-disable-line
+import Lyric from 'lyric-parser';
 import animations from 'create-keyframe-animation';
 import { prefixStyle } from '@/common/js/dom';
 import MyProgressBar from '@/components/base/MyProgressBar/MyProgressBar';
@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       playingLyric: '',
+      currentLyric: null,
       songReady: false,
       currentTime: 0,
       radius: 32
@@ -132,7 +133,7 @@ export default {
     currentSong() {
       this.$nextTick(() => {
         this.$refs.audio.play();
-        this.currentSong.getLyric();
+        this.getLyric();
       });
     },
     playing(newPlaying) {
@@ -149,6 +150,12 @@ export default {
       setCurrentIndex: 'SET_CURRENT_INDEX',
       setPlayMode: 'SET_PLAY_MODE'
     }),
+    getLyric() {
+      this.currentSong.getLyric().then((lyric) => {
+        this.currentLyric = new Lyric(lyric);
+        console.log(this.currentLyric);
+      });
+    },
     miniToPlayer() {
       this.setFullScreen(false);
     },
