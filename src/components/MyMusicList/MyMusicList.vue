@@ -115,9 +115,11 @@ export default {
         zIndex = 10;
         this.$refs.bgImage.style.paddingTop = 0;
         this.$refs.bgImage.style.height = RESERVED_HEIGHT + 'px';
+        this.$refs.playBtn.style.display = 'none';
       } else {
         this.$refs.bgImage.style.paddingTop = '70%';
         this.$refs.bgImage.style.height = 0;
+        this.$refs.playBtn.style.display = '';
       }
       this.$refs.bgImage.style.zIndex = zIndex;
       this.$refs.bgImage.style[TRANSFORM] = `scale(${scale})`;
