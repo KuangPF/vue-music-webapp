@@ -147,7 +147,13 @@ export default {
     }
   },
   watch: {
-    currentSong() {
+    currentSong(newSong, oldSong) {
+      if (newSong.id === oldSong.id) {
+        return;
+      }
+      if (this.currentLyric) {
+        this.currentLyric.stop();
+      }
       this.$nextTick(() => {
         this.$refs.audio.play();
         this.getLyric();
@@ -173,6 +179,10 @@ export default {
         if (this.playing) {
           this.currentLyric.play();
         }
+      }).catch(() => {
+        this.currentLyric = null;
+        this.playingLyric = '';
+        this.currentLineNum = 0;
       });
     },
     handleLyric({ lineNum, txt }) {
@@ -183,6 +193,7 @@ export default {
       } else {
         this.$refs.lyricList.scrollTo(0, 0, 1000);
       }
+      this.playingLyric = txt;
     },
     middleTouchStart(e) {
       this.touch.initiated = true;
@@ -280,6 +291,9 @@ export default {
     },
     togglePlaying() {
       this.setPlayingState(!this.playing);
+      if (this.currentLyric) {
+        this.currentLyric.togglePlay();
+      }
     },
     end() {
       if (this.mode === playMode.loop) {
@@ -291,19 +305,26 @@ export default {
     loop() {
       this.$refs.audio.currentTime = 0;
       this.$refs.audio.play();
+      if (this.currentLyric) {
+        this.currentLyric.seek();
+      }
     },
     prev() {
       if (!this.songReady) {
         return;
       }
-      let index = this.currentIndex - 1;
-      if (index < 0) {
-        index = this.playlist.length - 1;
-      }
-      console.log(index);
-      this.setCurrentIndex(index);
-      if (!this.playing) {
-        this.togglePlaying();
+      if (this.playlist.length === 1) {
+        this.loop();
+      } else {
+        let index = this.currentIndex - 1;
+        if (index < 0) {
+          index = this.playlist.length - 1;
+        }
+        console.log(index);
+        this.setCurrentIndex(index);
+        if (!this.playing) {
+          this.togglePlaying();
+        }
       }
       this.songReady = false;
     },
@@ -311,14 +332,18 @@ export default {
       if (!this.songReady) {
         return;
       }
-      let index = this.currentIndex + 1;
-      if (index > this.playlist.length - 1) {
-        index = 0;
+      if (this.playlist.length === 1) {
+        this.loop();
+      } else {
+        let index = this.currentIndex + 1;
+        if (index > this.playlist.length - 1) {
+          index = 0;
+        }
+        if (!this.playing) {
+          this.togglePlaying();
+        }
+        this.setCurrentIndex(index);
       }
-      if (!this.playing) {
-        this.togglePlaying();
-      }
-      this.setCurrentIndex(index);
       this.songReady = false;
     },
     ready() {
@@ -328,9 +353,13 @@ export default {
       this.currentTime = e.target.currentTime;
     },
     onProgressBarChange(percent) {
-      this.$refs.audio.currentTime = this.currentSong.duration * percent;
+      const currentTime = this.currentSong.duration * percent;
+      this.$refs.audio.currentTime = currentTime;
       if (!this.playing) {
         this.togglePlaying();
+      }
+      if (this.currentLyric) {
+        this.currentLyric.seek(currentTime * 1000);
       }
     },
     format(interval) {
