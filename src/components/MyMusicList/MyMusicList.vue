@@ -37,10 +37,12 @@ import MyLoading from '@/components/base/MyLoading/MyLoading';
 import MySongList from '@/components/base/MySongList/MySongList';
 import { prefixStyle } from '../../common/js/dom';
 import { mapActions } from 'vuex';
+import { playlistMixin } from '../../common/js/mixin.js';
 
 const TRANSFORM = prefixStyle('transform');
 const RESERVED_HEIGHT = 40;
 export default {
+  mixins: [playlistMixin],
   components: {
     MyScroll,
     MySongList,
@@ -79,6 +81,11 @@ export default {
     }
   },
   methods: {
+    handlePlaylist(playList) {
+      const bottom = playList.length > 0 ? '60px' : '';
+      this.$refs.list.$el.style.bottom = bottom;
+      this.$refs.list.refresh();
+    },
     random() {
       this.randomPlay({
         list: this.songs
