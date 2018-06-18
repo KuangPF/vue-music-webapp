@@ -7,34 +7,35 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {debounce} from "../../common/js/util"
-export default {
-    props:{
-      placeholder:{
-        type:String,
-        default:"搜索歌曲、歌手"
+  import {debounce} from 'common/js/util'
+
+  export default {
+    props: {
+      placeholder: {
+        type: String,
+        default: '搜索歌曲、歌手'
       }
     },
-    data(){
+    data() {
       return {
-        query:""
+        query: ''
       }
     },
-    methods:{
-      clear(){
-        this.query=''
+    methods: {
+      clear() {
+        this.query = ''
       },
-      setQuery(addQuery){
-        this.query=addQuery
+      setQuery(query) {
+        this.query = query
       },
-      blur(){
+      blur() {
         this.$refs.query.blur()
       }
     },
-    created(){
-      this.$watch('query',debounce((newQuery)=>{
-        this.$emit('query',newQuery)
-      },300))
+    created() {
+      this.$watch('query', debounce((newQuery) => {
+        this.$emit('query', newQuery)
+      }, 200))
     }
   }
 </script>

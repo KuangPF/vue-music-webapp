@@ -5,21 +5,22 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import MusicList from '../../components/music-list/music-list'
-  import {getSongList} from '../../api/recommend'
-  import {ERR_OK} from '../../api/config'
+  import MusicList from 'components/music-list/music-list'
+  import {getSongList} from 'api/recommend'
+  import {ERR_OK} from 'api/config'
   import {mapGetters} from 'vuex'
-  import {createSong} from '../../common/js/song'
+  import {createSong} from 'common/js/song'
+
   export default {
     computed: {
-      title(){
-          return this.disc.dissname
+      title() {
+        return this.disc.dissname
       },
-      bgImage(){
-          return this.disc.imgurl
+      bgImage() {
+        return this.disc.imgurl
       },
       ...mapGetters([
-        "disc"
+        'disc'
       ])
     },
     data() {
@@ -28,28 +29,24 @@
       }
     },
     created() {
-      console.log(this.disc)
       this._getSongList()
     },
     methods: {
-      _getSongList(){
-        if(!this.disc.dissid){
-          this.$router.push("/recommend")
+      _getSongList() {
+        if (!this.disc.dissid) {
+          this.$router.push('/recommend')
+          return
         }
-        const _this=this
-        function jsonCallback(result){
-          if(result.code===ERR_OK){
-            _this.songs=_this._normalizeSongs(result.cdlist[0].songlist)
+        getSongList(this.disc.dissid).then((res) => {
+          if (res.code === ERR_OK) {
+            this.songs = this._normalizeSongs(res.cdlist[0].songlist)
           }
-        }
-        getSongList(this.disc.dissid).then((res)=>{
-          eval(res)
         })
       },
-      _normalizeSongs(list){
-        let ret=[]
-        list.forEach((musicData)=>{
-          if(musicData.songid&&musicData.albumid){
+      _normalizeSongs(list) {
+        let ret = []
+        list.forEach((musicData) => {
+          if (musicData.songid && musicData.albummid) {
             ret.push(createSong(musicData))
           }
         })

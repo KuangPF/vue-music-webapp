@@ -8,22 +8,19 @@
         </div>
       </div>
       <div class="search-box-wrapper">
-        <search-box ref="searchBox" placeholder="搜索歌曲" @query="onQueryChange"></search-box>
+        <search-box ref="searchBox" @query="onQueryChange" placeholder="搜索歌曲"></search-box>
       </div>
       <div class="shortcut" v-show="!query">
         <switches :switches="switches" :currentIndex="currentIndex" @switch="switchItem"></switches>
         <div class="list-wrapper">
-          <scroll v-if="currentIndex===0" :data="playHistory" ref="songList" class="list-scroll">
+          <scroll ref="songList" v-if="currentIndex===0" class="list-scroll" :data="playHistory">
             <div class="list-inner">
               <song-list :songs="playHistory" @select="selectSong">
               </song-list>
             </div>
           </scroll>
-          <scroll  ref="searchList" class="list-scroll"
-                   v-if="currentIndex===1"
-                   :data="searchHistory"
-                   :refreshDelay="refreshDelay"
-                  >
+          <scroll :refreshDelay="refreshDelay" ref="searchList" v-if="currentIndex===1" class="list-scroll"
+                  :data="searchHistory">
             <div class="list-inner">
               <search-list @delete="deleteSearchHistory" @select="addQuery" :searches="searchHistory"></search-list>
             </div>
@@ -44,26 +41,25 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import SearchBox from '../../base/search-box/search-box'
-  import SongList from '../../base/song-list/song-list'
-  import SearchList from '../../base/search-list/search-list'
-  import Scroll from '../../base/scroll/scroll'
-  import Switches from '../../base/switches/switches'
-  import TopTip from '../../base/top-tip/top-tip'
-  import Suggest from '../../components/suggest/suggest'
-  import {searchMixin} from '../../common/js/mixin'
+  import SearchBox from 'base/search-box/search-box'
+  import SongList from 'base/song-list/song-list'
+  import SearchList from 'base/search-list/search-list'
+  import Scroll from 'base/scroll/scroll'
+  import Switches from 'base/switches/switches'
+  import TopTip from 'base/top-tip/top-tip'
+  import Suggest from 'components/suggest/suggest'
+  import {searchMixin} from 'common/js/mixin'
   import {mapGetters, mapActions} from 'vuex'
-  import Song from '../../common/js/song'
+  import Song from 'common/js/song'
 
   export default {
-    mixins:[searchMixin],
+    mixins: [searchMixin],
     data() {
       return {
         showFlag: false,
         showSinger: false,
         currentIndex: 0,
         songs: [],
-        query:"",
         switches: [
           {
             name: '最近播放'
@@ -74,54 +70,50 @@
         ]
       }
     },
-    methods:{
-      show(){
-        this.showFlag=true
-        setTimeout(()=>{
-          if(this.currentIndex===0){
-            this.$refs.songList.refresh()
-          }else{
-            this.$refs.searchList.refresh()
-          }
-        },20)
-      },
-      hide(){
-        this.showFlag=false
-      },
-      selectSuggest(){
-        this.saveSearch()
-        this.showTip()
-      },
-      switchItem(index){
-        this.currentIndex=index
-      },
-      selectSong(song,index){
-        if(index!==0){
-            this.insertSong(new Song(song))
-          this.showTip()
-        }
-      },
-      showTip(){
-        this.$refs.topTip.show()
-      },
-      ...mapActions([
-        'insertSong'
-      ])
-    },
     computed: {
       ...mapGetters([
         'playHistory'
       ])
     },
-
+    methods: {
+      show() {
+        this.showFlag = true
+        setTimeout(() => {
+          if (this.currentIndex === 0) {
+            this.$refs.songList.refresh()
+          } else {
+            this.$refs.searchList.refresh()
+          }
+        }, 20)
+      },
+      hide() {
+        this.showFlag = false
+      },
+      selectSong(song, index) {
+        if (index !== 0) {
+          this.insertSong(new Song(song))
+          this.$refs.topTip.show()
+        }
+      },
+      selectSuggest() {
+        this.$refs.topTip.show()
+        this.saveSearch()
+      },
+      switchItem(index) {
+        this.currentIndex = index
+      },
+      ...mapActions([
+        'insertSong'
+      ])
+    },
     components: {
-      Scroll,
       SearchBox,
-      Suggest,
-      Switches,
       SongList,
       SearchList,
-      TopTip
+      Scroll,
+      Switches,
+      TopTip,
+      Suggest
     }
   }
 </script>

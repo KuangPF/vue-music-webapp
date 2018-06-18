@@ -32,7 +32,7 @@ export const playerMixin = {
       return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random'
     },
     ...mapGetters([
-      'scquenceList',
+      'sequenceList',
       'playlist',
       'currentSong',
       'mode',
@@ -45,9 +45,9 @@ export const playerMixin = {
       this.setPlayMode(mode)
       let list = null
       if (mode === playMode.random) {
-        list = shuffle(this.scquenceList)
+        list = shuffle(this.sequenceList)
       } else {
-        list = this.scquenceList
+        list = this.sequenceList
       }
       this.resetCurrentIndex(list)
       this.setPlaylist(list)
@@ -79,13 +79,13 @@ export const playerMixin = {
     },
     ...mapMutations({
       setPlayMode: 'SET_PLAY_MODE',
-      setPlaylist: 'SET_PLAY_LIST',
+      setPlaylist: 'SET_PLAYLIST',
       setCurrentIndex: 'SET_CURRENT_INDEX',
       setPlayingState: 'SET_PLAYING_STATE'
     }),
     ...mapActions([
       'saveFavoriteList',
-      'deleteFavoriteList',
+      'deleteFavoriteList'
     ])
   }
 }
