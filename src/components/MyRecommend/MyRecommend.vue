@@ -1,6 +1,6 @@
 <!-- 推荐页组件 -->
 <template>
-  <div class="my-recommend">
+  <div class="my-recommend" ref="recommend">
     <!-- better-scroll 滚动组件，当请求到 lists 时才渲染 -->
     <my-scroll ref="scroll" :data="lists" class="recommend-content">
       <div>
@@ -46,7 +46,10 @@ import MySlider from '@/components/base/MySlider/MySlider';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { getRecommend, getList } from '@/api/recommend.js';
 import { mapMutations } from 'vuex';
+import { playlistMixin } from '../../common/js/mixin.js';
+
 export default {
+  mixins: [playlistMixin],
   data() {
     return {
       recommends: [],
@@ -65,6 +68,11 @@ export default {
     }, 1000);
   },
   methods: {
+    handlePlaylist(playlist) {
+      const bottom = playlist.length > 0 ? '60px' : '';
+      this.$refs.recommend.style.bottom = bottom;
+      this.$refs.scroll.refresh();
+    },
     ...mapMutations({
       setSonglist: 'SET_SONGLIST'
     }),

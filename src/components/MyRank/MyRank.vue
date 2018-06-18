@@ -1,5 +1,5 @@
 <template>
-  <div class="my-rank">
+  <div class="my-rank" ref="rank">
     <!-- 排行榜数据 -->
     <my-scroll ref="scrollRef" :data="toplist" class="toplist">
       <ul>
@@ -34,7 +34,10 @@ import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { getRankList } from '@/api/rank.js';
 import { mapMutations } from 'vuex';
+import { playlistMixin } from '../../common/js/mixin.js';
+
 export default {
+  mixins: [playlistMixin],
   components: {
     MyScroll,
     MyLoading
@@ -49,6 +52,11 @@ export default {
     this._getRankList();
   },
   methods: {
+    handlePlaylist(playlist) {
+      const bottom = this.playlist.length > 0 ? '60px' : '';
+      this.$refs.rank.style.bottom = bottom;
+      this.$refs.scrollRef.refresh();
+    },
     ...mapMutations({
       setRankList: 'SET_RANKLIST'
     }),
@@ -59,7 +67,6 @@ export default {
         }
       });
     },
-
     // 当首次获取到图片时，Better-scroll 重新计算
     loadImg() {
       if (!this.flag) {
@@ -67,7 +74,6 @@ export default {
         this.flag = true;
       }
     },
-
     selectItem(item) {
       this.$router.push({
         path: `/rank/${item.id}`
