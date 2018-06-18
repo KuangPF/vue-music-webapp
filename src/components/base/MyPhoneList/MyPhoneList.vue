@@ -103,6 +103,9 @@ export default {
     }
   },
   methods: {
+    refresh() {
+      this.$refs.scrollRef.refresh();
+    },
     scroll(pos) {
       this.scrollY = pos.y;
     },
