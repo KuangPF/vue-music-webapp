@@ -1,6 +1,6 @@
 <template>
   <div class="my-search">
-    mySearch
+    <div class="search-box-wrapper"></div>
   </div>
 </template>
 
@@ -10,6 +10,6 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang='scss' scoped>
+@import "~@/common/scss/mySearch/mySearch.scss";
 </style>
