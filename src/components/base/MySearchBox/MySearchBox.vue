@@ -2,7 +2,7 @@
   <div class="my-search-box">
     <i class="icon-search"></i>
     <input ref="query" v-model="query" class="box" :placeholder="placeholder" />
-    <!--  <i @click="clear" v-show="query" class="icon-dismiss"></i> -->
+    <i @click="clear" v-show="query" class="icon-dismiss"></i>
   </div>
 </template>
 
@@ -18,6 +18,11 @@ export default {
     return {
       query: ''
     };
+  },
+  methods: {
+    clear() {
+      this.query = '';
+    }
   }
 };
 </script>
