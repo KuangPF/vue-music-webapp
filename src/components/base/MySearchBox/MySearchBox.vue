@@ -24,7 +24,7 @@ export default {
 
 <style lang='scss'>
 @import "~@/common/scss/const.scss";
-.search-box {
+.my-search-box {
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -45,12 +45,17 @@ export default {
   background: $color-highlight-background;
   color: $color-text;
   font-size: $font-size-medium;
-  &::placeholder {
+  outline: none;
+  border: none;
+  & ::placeholder {
     color: $color-text-d;
   }
 }
 .icon-dismiss {
   font-size: 16px;
   color: $color-background;
+}
+input::focus {
+  border: none;
 }
 </style>

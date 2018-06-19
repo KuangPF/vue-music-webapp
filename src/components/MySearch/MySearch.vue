@@ -1,6 +1,8 @@
 <template>
   <div class="my-search">
-    <div class="search-box-wrapper"></div>
+    <div class="search-box-wrapper">
+      <my-search-box></my-search-box>
+    </div>
   </div>
 </template>
 
