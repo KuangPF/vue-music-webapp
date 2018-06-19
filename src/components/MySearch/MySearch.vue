@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import MySearchBox from '@/components/base/MySearchBox/MySearchBox';
 export default {
-
+  components: {
+    MySearchBox
+  }
 };
 </script>
 
