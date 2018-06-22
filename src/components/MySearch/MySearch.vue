@@ -8,6 +8,11 @@
         <div>
           <div class="hot-key">
             <h1 class="title">热门搜索</h1>
+            <ul>
+              <li class="item" v-for="(item,index) in hotKey" :key="index">
+                <span>{{item.k}}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </my-scroll>
@@ -21,6 +26,11 @@ import MyScroll from '@/components/base/MyScroll/MyScroll';
 import { getHotKey } from '@/api/search.js';
 import { ERR_OK } from '@/api/config';
 export default {
+  data() {
+    return {
+      hotKey: []
+    };
+  },
   components: {
     MySearchBox,
     MyScroll
@@ -32,7 +42,7 @@ export default {
     _getHotKey() {
       getHotKey().then(res => {
         if (res.code === ERR_OK) {
-          console.log(res);
+          this.hotKey = res.data.hotkey.slice(0, 10);
         }
       });
     }
