@@ -18,10 +18,24 @@
 <script>
 import MySearchBox from '@/components/base/MySearchBox/MySearchBox';
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import { getHotKey } from '@/api/search.js';
+import { ERR_OK } from '@/api/config';
 export default {
   components: {
     MySearchBox,
     MyScroll
+  },
+  created() {
+    this._getHotKey();
+  },
+  methods: {
+    _getHotKey() {
+      getHotKey().then(res => {
+        if (res.code === ERR_OK) {
+          console.log(res);
+        }
+      });
+    }
   }
 };
 </script>
