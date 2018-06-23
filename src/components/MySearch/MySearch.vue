@@ -1,7 +1,7 @@
 <template>
   <div class="my-search">
     <div class="search-box-wrapper">
-      <my-search-box></my-search-box>
+      <my-search-box @query ="onQueryChange"></my-search-box>
     </div>
     <div ref="shortcutWrapper" class="shortcut-wrapper">
       <my-scroll ref="shortcut" class="shortcut">
@@ -45,6 +45,9 @@ export default {
           this.hotKey = res.data.hotkey.slice(0, 10);
         }
       });
+    },
+    onQueryChange(query) {
+      console.log(query);
     }
   }
 };
