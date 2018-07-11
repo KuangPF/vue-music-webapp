@@ -14,6 +14,7 @@
               </li>
             </ul>
           </div>
+          <my-suggest></my-suggest>
         </div>
       </my-scroll>
     </div>
@@ -23,6 +24,7 @@
 <script>
 import MySearchBox from '@/components/base/MySearchBox/MySearchBox';
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import MySuggest from '@/components/MySuggest/MySuggest';
 import { getHotKey } from '@/api/search.js';
 import { ERR_OK } from '@/api/config';
 export default {
@@ -33,7 +35,8 @@ export default {
   },
   components: {
     MySearchBox,
-    MyScroll
+    MyScroll,
+    MySuggest
   },
   created() {
     this._getHotKey();
