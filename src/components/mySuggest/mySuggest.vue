@@ -1,24 +1,32 @@
 <template>
-  <ul class="suggest-list">
-    <li @click="selectItem(item)" class="suggest-item" v-for="item in result">
-      <div class="icon">
-        <i :class="getIconCls(item)"></i>
-      </div>
-      <div class="name">
-        <p class="text" v-html="getDisplayName(item)"></p>
-      </div>
-    </li>
-    <loading v-show="hasMore" title=""></loading>
-  </ul>
+  <my-scroll>
+    <ul class="suggest-list">
+      <li>
+        <div class="icon">
+          <i></i>
+        </div>
+        <div class="name">
+          <p class="text"></p>
+        </div>
+      </li>
+    </ul>
+    <div class="no-result-wrapper">
+    </div>
+  </my-scroll>
 </template>
 
 <script>
+import MyScroll from '@/components/base/MyScroll/MyScroll';
 export default {
-
-}
+  components: {
+    MyScroll
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+@import "~@/common/scss/const.scss";
+@import "~@/common/scss/mixin.scss";
 .suggest {
   height: 100%;
   overflow: hidden;
@@ -32,6 +40,10 @@ export default {
     .icon {
       flex: 0 0 30px;
       width: 30px;
+      [class^="icon-"] {
+        font-size: 14px;
+        color: $color-text-d;
+      }
     }
     .name {
       flex: 1;
