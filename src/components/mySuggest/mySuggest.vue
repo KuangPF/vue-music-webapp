@@ -1,12 +1,12 @@
 <template>
   <my-scroll>
     <ul class="suggest-list">
-      <li>
+      <li class="suggest-item" v-for="(item,index) in result" :key="index">
         <div class="icon">
-          <i></i>
+          <i :class="getIconCls(item)"></i>
         </div>
         <div class="name">
-          <p class="text"></p>
+          <p class="text" v-html="getDisplayName(item)"></p>
         </div>
       </li>
     </ul>
@@ -17,12 +17,24 @@
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
-import { serach } from '@/api/search.js';
+import { search } from '@/api/search.js';
+import { ERR_OK } from '@/api/config';
+const TYPE_SINGER = 'singer';
 export default {
+  data() {
+    return {
+      pageNum: 1,
+      result: []
+    };
+  },
   props: {
     query: {
       type: String,
       default: ''
+    },
+    showSinger: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -30,7 +42,37 @@ export default {
   },
   methods: {
     search() {
-      
+      // let _this = this;
+      search(this.query, this.pageNum, this.showSinger).then(res => {
+        if (res.code === ERR_OK) {
+          this.result = this.genResult(res.data);
+          console.log(this.result);
+        }
+      });
+    },
+    genResult(data) {
+      let ret = [];
+      if (data.zhida && data.zhida.singerid) {
+        ret.push({ ...data.zhida, ...{ type: TYPE_SINGER } });
+      }
+      if (data.song) {
+        ret = ret.concat(this._normalized(data.song.list));
+      }
+      return ret;
+    }
+  },
+  getIconCls(item) {
+    if (item.type === TYPE_SINGER) {
+      return 'icon-mine';
+    } else {
+      return 'icon-music';
+    }
+  },
+  getDisplayName(item) {
+    if (item.type === TYPE_SINGER) {
+      return item.singername;
+    } else {
+      return `${item.name} - ${item.singer}`;
     }
   }
 };
