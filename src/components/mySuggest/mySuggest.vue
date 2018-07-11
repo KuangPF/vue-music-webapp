@@ -17,9 +17,21 @@
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import { serach } from '@/api/search.js';
 export default {
+  props: {
+    query: {
+      type: String,
+      default: ''
+    }
+  },
   components: {
     MyScroll
+  },
+  methods: {
+    search() {
+      
+    }
   }
 };
 </script>
