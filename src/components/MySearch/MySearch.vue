@@ -1,9 +1,9 @@
 <template>
   <div class="my-search">
     <div class="search-box-wrapper">
-      <my-search-box @query ="onQueryChange"></my-search-box>
+      <my-search-box @query="onQueryChange"></my-search-box>
     </div>
-    <div ref="shortcutWrapper" class="shortcut-wrapper">
+    <div ref="shortcutWrapper" class="shortcut-wrapper" v-show="!query">
       <my-scroll ref="shortcut" class="shortcut">
         <div>
           <div class="hot-key">
@@ -14,9 +14,14 @@
               </li>
             </ul>
           </div>
-          <my-suggest></my-suggest>
+          <div class="search-history">
+
+          </div>
         </div>
       </my-scroll>
+    </div>
+    <div class="search-result" v-show="query">
+      <my-suggest :query="query"></my-suggest>
     </div>
   </div>
 </template>
@@ -30,7 +35,8 @@ import { ERR_OK } from '@/api/config';
 export default {
   data() {
     return {
-      hotKey: []
+      hotKey: [],
+      query: ''
     };
   },
   components: {
@@ -50,7 +56,7 @@ export default {
       });
     },
     onQueryChange(query) {
-      console.log(query);
+      this.query = query;
     }
   }
 };

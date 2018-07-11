@@ -1,5 +1,5 @@
 <template>
-  <my-scroll>
+  <my-scroll  class="suggest">
     <ul class="suggest-list">
       <li class="suggest-item" v-for="(item,index) in result" :key="index">
         <div class="icon">
@@ -18,6 +18,7 @@
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
 import { search } from '@/api/search.js';
+import { createSong } from '@/common/js/song';
 import { ERR_OK } from '@/api/config';
 const TYPE_SINGER = 'singer';
 export default {
@@ -34,7 +35,7 @@ export default {
     },
     showSinger: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   components: {
@@ -46,7 +47,6 @@ export default {
       search(this.query, this.pageNum, this.showSinger).then(res => {
         if (res.code === ERR_OK) {
           this.result = this.genResult(res.data);
-          console.log(this.result);
         }
       });
     },
@@ -59,21 +59,36 @@ export default {
         ret = ret.concat(this._normalized(data.song.list));
       }
       return ret;
+    },
+    _normalized(list) {
+      let ret = [];
+      list.forEach((musicData) => {
+        if (musicData.songid && musicData.albumid) {
+          ret.push(createSong(musicData));
+        }
+      });
+      return ret;
+    },
+    getIconCls(item) {
+      if (item.type === TYPE_SINGER) {
+        return 'icon-mine';
+      } else {
+        return 'icon-music';
+      }
+    },
+    getDisplayName(item) {
+      if (item.type === TYPE_SINGER) {
+        return item.singername;
+      } else {
+        return `${item.name} - ${item.singer}`;
+      }
     }
   },
-  getIconCls(item) {
-    if (item.type === TYPE_SINGER) {
-      return 'icon-mine';
-    } else {
-      return 'icon-music';
+  watch: {
+    query() {
+      this.search();
     }
-  },
-  getDisplayName(item) {
-    if (item.type === TYPE_SINGER) {
-      return item.singername;
-    } else {
-      return `${item.name} - ${item.singer}`;
-    }
+
   }
 };
 </script>
