@@ -21,12 +21,14 @@ import { search } from '@/api/search.js';
 import { createSong } from '@/common/js/song';
 import { ERR_OK } from '@/api/config';
 const TYPE_SINGER = 'singer';
+const perpage = 20;
 export default {
   data() {
     return {
       pageNum: 1,
       result: [],
-      pullup: true
+      pullup: true,
+      hasMore: true
     };
   },
   props: {
@@ -84,7 +86,24 @@ export default {
         return `${item.name} - ${item.singer}`;
       }
     },
-    searchMore() { }
+    searchMore() {
+      if (!this.hasMore) {
+        return; // eslint-disable-line
+      }
+      this.pageNum++;
+      search(this.query, this.pageNum, this.showSinger, perpage).then(res => {
+        if (res.code === ERR_OK) {
+          this.result = this.result.concat(this.genResult(res.data));
+        }
+        this.checkMore(res.data);
+      });
+    },
+    checkMore(data) {
+      const song = data.song;
+      if (!song.list.length || (song.curnum + song.curpage * perpage) >= song.totlenum) {
+        this.hasMore = false;
+      }
+    }
   },
   watch: {
     query() {
