@@ -1,5 +1,5 @@
 <template>
-  <my-scroll class="suggest" :data="result" @scrollToEnd="searchMore" :pullup="pullup">
+  <my-scroll class="suggest" :data="result" @scrollToEnd="searchMore" :pullup="pullup" ref="suggest">
     <ul class="suggest-list">
       <li class="suggest-item" v-for="(item,index) in result" :key="index">
         <div class="icon">
@@ -9,6 +9,7 @@
           <p class="text" v-html="getDisplayName(item)"></p>
         </div>
       </li>
+      <my-loading v-show="hasMore" title=""></my-loading>
     </ul>
     <div class="no-result-wrapper">
     </div>
@@ -17,6 +18,7 @@
 
 <script>
 import MyScroll from '@/components/base/MyScroll/MyScroll';
+import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { search } from '@/api/search.js';
 import { createSong } from '@/common/js/song';
 import { ERR_OK } from '@/api/config';
@@ -42,14 +44,19 @@ export default {
     }
   },
   components: {
-    MyScroll
+    MyScroll,
+    MyLoading
   },
   methods: {
     search() {
       // let _this = this;
+      this.hasMore = true;
+      this.pageNum = 1;
+      this.$refs.suggest.scrollTo(0, 0);
       search(this.query, this.pageNum, this.showSinger).then(res => {
         if (res.code === ERR_OK) {
           this.result = this.genResult(res.data);
+          this.checkMore(res.data);
         }
       });
     },

@@ -59,12 +59,13 @@ export default {
 .box {
   flex: 1;
   margin: 0 5px;
-  line-height: 18px;
+  line-height: 40px;
   background: $color-highlight-background;
   color: $color-text;
   font-size: $font-size-medium;
   outline: none;
   border: none;
+  height: 100%;
   & ::placeholder {
     color: $color-text-d;
   }
