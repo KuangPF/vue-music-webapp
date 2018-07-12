@@ -1,5 +1,5 @@
 <template>
-  <my-scroll  class="suggest">
+  <my-scroll class="suggest" :data="result" @scrollToEnd="searchMore" :pullup="pullup">
     <ul class="suggest-list">
       <li class="suggest-item" v-for="(item,index) in result" :key="index">
         <div class="icon">
@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       pageNum: 1,
-      result: []
+      result: [],
+      pullup: true
     };
   },
   props: {
@@ -82,7 +83,8 @@ export default {
       } else {
         return `${item.name} - ${item.singer}`;
       }
-    }
+    },
+    searchMore() { }
   },
   watch: {
     query() {
