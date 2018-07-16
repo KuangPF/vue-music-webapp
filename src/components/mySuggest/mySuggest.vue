@@ -1,7 +1,7 @@
 <template>
   <my-scroll class="suggest" :data="result" @scrollToEnd="searchMore" :pullup="pullup" ref="suggest">
     <ul class="suggest-list">
-      <li class="suggest-item" v-for="(item,index) in result" :key="index">
+      <li class="suggest-item" @click="selectItem(item)" v-for="(item,index) in result" :key="index">
         <div class="icon">
           <i :class="getIconCls(item)"></i>
         </div>
@@ -20,8 +20,10 @@
 import MyScroll from '@/components/base/MyScroll/MyScroll';
 import MyLoading from '@/components/base/MyLoading/MyLoading';
 import { search } from '@/api/search.js';
+import { Singer } from '@/common/js/SingerClass';
 import { createSong } from '@/common/js/song';
 import { ERR_OK } from '@/api/config';
+import { mapMutations } from 'vuex';
 const TYPE_SINGER = 'singer';
 const perpage = 20;
 export default {
@@ -93,6 +95,19 @@ export default {
         return `${item.name} - ${item.singer}`;
       }
     },
+    selectItem(item) {
+      console.log(item);
+      if (item.type === TYPE_SINGER) {
+        const singer = new Singer({
+          id: item.singerid,
+          name: item.singername
+        });
+        this.$router.push({
+          path: `/singer/${singer.id}`
+        });
+        this.setSinger(singer);
+      }
+    },
     searchMore() {
       if (!this.hasMore) {
         return; // eslint-disable-line
@@ -107,11 +122,13 @@ export default {
     },
     checkMore(data) {
       const song = data.song;
-      console.log(song);
       if (!song.list.length || (song.curnum + song.curpage * perpage) >= song.totlenum) {
         this.hasMore = false;
       }
-    }
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    })
   },
   watch: {
     query() {
