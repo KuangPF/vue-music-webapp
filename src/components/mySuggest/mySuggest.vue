@@ -53,7 +53,7 @@ export default {
       this.hasMore = true;
       this.pageNum = 1;
       this.$refs.suggest.scrollTo(0, 0);
-      search(this.query, this.pageNum, this.showSinger).then(res => {
+      search(this.query, this.pageNum, this.showSinger, perpage).then(res => {
         if (res.code === ERR_OK) {
           this.result = this.genResult(res.data);
           this.checkMore(res.data);
@@ -107,6 +107,7 @@ export default {
     },
     checkMore(data) {
       const song = data.song;
+      console.log(song);
       if (!song.list.length || (song.curnum + song.curpage * perpage) >= song.totlenum) {
         this.hasMore = false;
       }
