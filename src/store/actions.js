@@ -20,14 +20,17 @@ export const selectPlay = function ({
   list,
   index
 }) {
-  commit(types.SET_PLAYING_STATE, true);
-  commit(types.SET_FULL_SCREEN, true);
-  if (state.mode === playMode.random) { // 随机播放
+  commit(types.SET_SCQUENCE_LIST, list);
+  if (state.mode === playMode.random) {
+    let randomList = shuffle(list);
+    commit(types.SET_PLAY_LIST, randomList);
+    index = findIndex(randomList, list[index]);
   } else {
     commit(types.SET_PLAY_LIST, list);
   }
-  commit(types.SET_SCQUENCE_LIST, list);
   commit(types.SET_CURRENT_INDEX, index);
+  commit(types.SET_FULL_SCREEN, true);
+  commit(types.SET_PLAYING_STATE, true);
 };
 
 // 随机播放

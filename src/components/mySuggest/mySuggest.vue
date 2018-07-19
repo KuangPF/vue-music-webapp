@@ -96,7 +96,6 @@ export default {
       }
     },
     selectItem(item) {
-      console.log(item);
       if (item.type === TYPE_SINGER) {
         const singer = new Singer({
           id: item.singermid,
