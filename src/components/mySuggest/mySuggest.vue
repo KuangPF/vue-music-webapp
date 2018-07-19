@@ -99,7 +99,7 @@ export default {
       console.log(item);
       if (item.type === TYPE_SINGER) {
         const singer = new Singer({
-          id: item.singerid,
+          id: item.singermid,
           name: item.singername
         });
         this.$router.push({
