@@ -23,7 +23,7 @@ import { search } from '@/api/search.js';
 import { Singer } from '@/common/js/SingerClass';
 import { createSong } from '@/common/js/song';
 import { ERR_OK } from '@/api/config';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapActions } from 'vuex';
 const TYPE_SINGER = 'singer';
 const perpage = 20;
 export default {
@@ -106,6 +106,8 @@ export default {
           path: `/singer/${singer.id}`
         });
         this.setSinger(singer);
+      } else {
+        this.insertSong(item);
       }
     },
     searchMore() {
@@ -128,7 +130,10 @@ export default {
     },
     ...mapMutations({
       setSinger: 'SET_SINGER'
-    })
+    }),
+    ...mapActions([
+      'insertSong'
+    ])
   },
   watch: {
     query() {
