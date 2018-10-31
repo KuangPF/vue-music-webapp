@@ -21,10 +21,3 @@
 ### 相关说明
 
 `master` 为日常代码... `vue-music-webapp` 为项目源代码，
-
-`git clone` 分支：
-
-``` bash
-git clone -b vue-music-webapp https://github.com/KuangPF/vue-music-webapp.git
-
-```
